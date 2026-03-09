@@ -2,18 +2,22 @@
     import Button from '$lib/components/ui/Button.svelte';
     import { onMount, tick } from 'svelte';
     import { gsap } from 'gsap';
-    import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-    gsap.registerPlugin(ScrollTrigger);
 
     let wrapperEl = $state<HTMLElement | null>(null);
     let trackEl = $state<HTMLElement | null>(null);
 
     onMount(() => {
-        if (!wrapperEl || !trackEl) return;
+        let ctx: gsap.Context | null = null;
 
-        tick().then(() => {
-            const ctx = gsap.context(() => {
+        (async () => {
+            const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+            gsap.registerPlugin(ScrollTrigger);
+
+            if (!wrapperEl || !trackEl) return;
+
+            await tick();
+
+            ctx = gsap.context(() => {
                 ScrollTrigger.matchMedia({
                     '(min-width: 768px)': () => {
                         const maxScroll = trackEl!.scrollWidth - wrapperEl!.offsetWidth;
@@ -56,9 +60,8 @@
                             isDragging = false;
                             trackX = currentX;
 
-                            // Snap to nearest image
                             const imageWidth = trackEl!.querySelector('img')!.offsetWidth;
-                            const gap = 8; // adjust to match your gap-0_5 value in px
+                            const gap = 8;
                             const snapIndex = Math.round(-trackX / (imageWidth + gap));
                             const snappedX = Math.max(getMaxScroll(), Math.min(0, -(snapIndex * (imageWidth + gap))));
 
@@ -82,9 +85,9 @@
                     }
                 });
             });
+        })();
 
-            return () => ctx.revert();
-        });
+        return () => ctx?.revert();
     });
 </script>
 

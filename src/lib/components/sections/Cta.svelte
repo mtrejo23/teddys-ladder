@@ -2,9 +2,6 @@
     import Button from '$lib/components/ui/Button.svelte';
     import { onMount, tick } from 'svelte';
     import { gsap } from 'gsap';
-    import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-    gsap.registerPlugin(ScrollTrigger);
 
     let {
         ctaTitle,
@@ -33,9 +30,15 @@
     let wrapperEl = $state<HTMLElement | null>(null);
 
     onMount(() => {
-        if (!gradientEl || !wrapperEl) return;
+        let triggers: ReturnType<typeof ScrollTrigger.getAll> = [];
 
-        tick().then(() => {
+        (async () => {
+            const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+            gsap.registerPlugin(ScrollTrigger);
+
+            if (!gradientEl || !wrapperEl) return;
+
+            await tick();
             ScrollTrigger.refresh();
 
             gsap.fromTo(
@@ -52,9 +55,11 @@
                     }
                 }
             );
-        });
 
-        return () => ScrollTrigger.getAll().forEach(t => t.kill());
+            triggers = ScrollTrigger.getAll();
+        })();
+
+        return () => triggers.forEach(t => t.kill());
     });
 </script>
 

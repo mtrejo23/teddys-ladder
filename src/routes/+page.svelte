@@ -88,7 +88,7 @@
             programButtonText: "View Program"
         },
         {
-            programTitle: "Fun & Celebrations",
+            programTitle: "Learning & Celebrations",
             programAges: "",
             programDescription: "Teddy's Juniors Cubs program strengthens academic readiness by introducing reading, writing, math, science, and social studies through engaging, age-appropriate learning.",
             programHref: "/",

@@ -31,7 +31,7 @@
 @use '$lib/styles/abstracts' as a;
 
 .hero {
-    height: clamp(700px, 100vh, 900px);
+    height: clamp(700px, 100dvh, 900px);
 
     @include a.min(md) {
         padding-bottom: 0;

@@ -1,0 +1,27 @@
+@use '$lib/styles/abstracts' as a;
+
+$gaps: (
+    '0_5': a.$sp-0_5,
+    '1': a.$sp-1,
+    '1_5': a.$sp-1_5,
+    '2': a.$sp-2,
+    '2_5': a.$sp-2_5,
+    '3': a.$sp-3,
+    '3_5': a.$sp-3_5,
+    '4-2': a.$sp-4-2,
+    '4_5': a.$sp-4_5,
+    '5': a.$sp-5,
+    '5_5': a.$sp-5_5,
+    '6': a.$sp-6,
+    '6_5': a.$sp-6_5,
+    '7': a.$sp-7,
+    '7_5': a.$sp-7_5,
+    '8': a.$sp-8,
+    '12': a.$sp-12,
+);
+
+@mixin gaps($property: 'gap') {
+    @each $key, $val in $gaps {
+        &--#{$property}-#{$key} { #{$property}: $val; }
+    }
+}

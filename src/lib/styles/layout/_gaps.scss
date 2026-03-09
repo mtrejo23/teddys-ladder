@@ -1,0 +1,67 @@
+@use '$lib/styles/abstracts' as a;
+
+@mixin gap-utilities($prefix: null) {
+    @if $prefix == null {
+        $prefix: '';
+    } @else {
+        $prefix: $prefix + '\\:';
+    }
+    .#{$prefix}gap-0_5 { gap: a.$sp-0_5; }
+    .#{$prefix}gap-1 { gap: a.$sp-1; }
+    .#{$prefix}gap-1_5 { gap: a.$sp-1_5; }
+    .#{$prefix}gap-2 { gap: a.$sp-2; }
+    .#{$prefix}gap-2_5 { gap: a.$sp-2_5; }
+    .#{$prefix}gap-3 { gap: a.$sp-3; }
+    .#{$prefix}gap-3_5 { gap: a.$sp-3_5; }
+    .#{$prefix}gap-4 { gap: a.$sp-4; }
+    .#{$prefix}gap-4_5 { gap: a.$sp-4_5; }
+    .#{$prefix}gap-5 { gap: a.$sp-5; }
+    .#{$prefix}gap-5_5 { gap: a.$sp-5_5; }
+    .#{$prefix}gap-6 { gap: a.$sp-6; }
+    .#{$prefix}gap-6_5 { gap: a.$sp-6_5; }
+    .#{$prefix}gap-7 { gap: a.$sp-7; }
+    .#{$prefix}gap-7_5 { gap: a.$sp-7_5; }
+    .#{$prefix}gap-8 { gap: a.$sp-8; }
+    .#{$prefix}gap-12 { gap: a.$sp-12; }
+    .#{$prefix}gap-section { gap: a.$sp-section; }
+
+    .#{$prefix}column-gap-0_5 { column-gap: a.$sp-0_5; }
+    .#{$prefix}column-gap-1 { column-gap: a.$sp-1; }
+    .#{$prefix}column-gap-1_5 { column-gap: a.$sp-1_5; }
+    .#{$prefix}column-gap-2 { column-gap: a.$sp-2; }
+    .#{$prefix}column-gap-2_5 { column-gap: a.$sp-2_5; }
+    .#{$prefix}column-gap-3 { column-gap: a.$sp-3; }
+    .#{$prefix}column-gap-3_5 { column-gap: a.$sp-3_5; }
+    .#{$prefix}column-gap-4 { column-gap: a.$sp-4; }
+    .#{$prefix}column-gap-4_5 { column-gap: a.$sp-4_5; }
+    .#{$prefix}column-gap-5 { column-gap: a.$sp-5; }
+    .#{$prefix}column-gap-5_5 { column-gap: a.$sp-5_5; }
+    .#{$prefix}column-gap-6 { column-gap: a.$sp-6; }
+    .#{$prefix}column-gap-6_5 { column-gap: a.$sp-6_5; }
+    .#{$prefix}column-gap-7 { column-gap: a.$sp-7; }
+    .#{$prefix}column-gap-7_5 { column-gap: a.$sp-7_5; }
+    .#{$prefix}column-gap-8 { column-gap: a.$sp-8; }
+    .#{$prefix}column-gap-12 { column-gap: a.$sp-12; }
+
+    .#{$prefix}row-gap-0_5 { row-gap: a.$sp-0_5; }
+    .#{$prefix}row-gap-1 { row-gap: a.$sp-1; }
+    .#{$prefix}row-gap-1_5 { row-gap: a.$sp-1_5; }
+    .#{$prefix}row-gap-2 { row-gap: a.$sp-2; }
+    .#{$prefix}row-gap-2_5 { row-gap: a.$sp-2_5; }
+    .#{$prefix}row-gap-3 { row-gap: a.$sp-3; }
+    .#{$prefix}row-gap-3_5 { row-gap: a.$sp-3_5; }
+    .#{$prefix}row-gap-4 { row-gap: a.$sp-4; }
+    .#{$prefix}row-gap-4_5 { row-gap: a.$sp-4_5; }
+    .#{$prefix}row-gap-5 { row-gap: a.$sp-5; }
+    .#{$prefix}row-gap-5_5 { row-gap: a.$sp-5_5; }
+    .#{$prefix}row-gap-6 { row-gap: a.$sp-6; }
+    .#{$prefix}row-gap-6_5 { row-gap: a.$sp-6_5; }
+    .#{$prefix}row-gap-7 { column-gap: a.$sp-7; }
+    .#{$prefix}row-gap-7_5 { column-gap: a.$sp-7_5; }
+    .#{$prefix}row-gap-8 { column-gap: a.$sp-8; }
+    .#{$prefix}row-gap-12 { column-gap: a.$sp-12; }
+}
+
+@include gap-utilities();
+@include a.min(md) { @include gap-utilities('md'); }
+@include a.min(lg) { @include gap-utilities('lg'); }

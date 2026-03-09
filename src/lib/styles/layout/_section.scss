@@ -1,0 +1,19 @@
+@use '$lib/styles/abstracts' as a;
+
+section {
+    position: relative;
+    padding-block: a.$sp-section;
+}
+
+.section {
+    
+    &__intro {
+
+        @include a.min(md) {
+
+            grid-column-start: 2;
+            grid-column-end: 8;
+            
+        }
+    }
+}

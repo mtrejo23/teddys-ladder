@@ -1,0 +1,68 @@
+@use '$lib/styles/abstracts' as a;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: a.$clr-primary;
+    line-height: a.$lh-sm;
+    margin-top: 0;
+    margin-bottom: .5em;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+h1 {
+    font-size: a.$fs-h1;
+}
+
+h2 {
+    font-size: a.$fs-h2;
+}
+
+h3 {
+    font-size: a.$fs-h3;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1em;
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+sup {
+    font-size: 50% !important;
+    top: -.75em !important;
+}
+
+.text-align-left {
+    text-align: left;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+@include a.min(md) {
+    .md\:text-align-left {
+        text-align: left;
+    }
+
+    .md\:text-align-center {
+        text-align: center;
+    }
+
+    .md\:text-align-right {
+        text-align: right;
+    }
+}

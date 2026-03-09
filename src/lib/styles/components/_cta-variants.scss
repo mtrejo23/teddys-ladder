@@ -1,0 +1,47 @@
+@use '$lib/styles/abstracts' as a;
+
+.cta {
+    &--intro {
+        padding-top: 0;
+    }
+}
+
+.cta.cta--teddys-ladder {
+
+    .cta__wrapper {
+        background-color: a.$clr-primary;
+        
+        .cta__title,.cta__description {
+            color: a.$clr-white;
+        }
+
+        .cta__bg-gradient {
+            background: linear-gradient(0deg, #002157 50%, rgba(0, 33, 87, calc(var(--gradient-alpha, 0))) 100%);
+
+            @include a.min(md) {
+                background: linear-gradient(90deg, #002157 50%, rgba(0, 33, 87, calc(var(--gradient-alpha, 0))) 100%);
+            }
+        }
+    }
+    
+}
+
+.cta.cta--teddys-juniors {
+
+    .cta__wrapper {
+        background-color: a.$clr-secondary;
+        
+        .cta__title,.cta__description {
+            color: a.$clr-white;
+        }
+
+        .cta__bg-gradient {
+            background: linear-gradient(0deg, #1DA1F2 50%, rgba(29, 161, 242, calc(var(--gradient-alpha, 0))) 100%);
+
+            @include a.min(md) {
+                background: linear-gradient(90deg, #1DA1F2 50%, rgba(29, 161, 242, calc(var(--gradient-alpha, 0))) 100%);
+            }
+        }
+    }
+    
+}

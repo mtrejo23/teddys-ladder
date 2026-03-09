@@ -1,0 +1,11 @@
+@use '$lib/styles/abstracts' as a;
+
+.container {
+    position: relative;
+    max-width: min(86rem, calc(100% - a.$sp-container * 2));
+    margin-inline: auto;
+
+    &--full {
+        max-width: calc(100% - a.$sp-container * 2);
+    }
+}

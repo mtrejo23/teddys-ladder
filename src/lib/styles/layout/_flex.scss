@@ -1,0 +1,29 @@
+@use '$lib/styles/abstracts' as a;
+
+@mixin flex-classes($prefix: 'flex') {
+    .#{$prefix} {
+        display: flex;
+
+        &--column { flex-direction: column; }
+        &--row { flex-direction: row; }
+        &--wrap { flex-wrap: wrap; }
+        &--nowrap { flex-wrap: nowrap; }
+
+        &--justify-start { justify-content: flex-start; }
+        &--justify-center { justify-content: center; }
+        &--justify-end { justify-content: flex-end; }
+        &--justify-between { justify-content: space-between; }
+        &--justify-around { justify-content: space-around; }
+        &--justify-evenly { justify-content: space-evenly; }
+
+        &--items-start { align-items: flex-start; }
+        &--items-center { align-items: center; }
+        &--items-end { align-items: flex-end; }
+        &--items-stretch { align-items: stretch; }
+        &--items-baseline { align-items: baseline; }
+    }
+}
+
+@include flex-classes('flex');
+@include a.min(md) { @include flex-classes('md\\:flex'); }
+@include a.min(lg) { @include flex-classes('lg\\:flex'); }

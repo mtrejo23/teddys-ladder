@@ -1,0 +1,26 @@
+$breakpoints: (
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px
+);
+
+@mixin mq($bp, $type: min) {
+  $value: map-get($breakpoints, $bp);
+
+  @if $value == null {
+    @error "No breakpoint named `#{$bp}` found.";
+  }
+
+  @if $type == min {
+    @media (min-width: $value) {
+      @content;
+    }
+  } @else if $type == max {
+    @media (max-width: ($value - 1)) {
+      @content;
+    }
+  } @else {
+    @error "mq() type must be `min` or `max`.";
+  }
+}

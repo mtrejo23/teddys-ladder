@@ -1,0 +1,80 @@
+// Colors
+$clr-primary: #002157;
+$clr-secondary: #1DA1F2;
+$clr-white: #fff;
+$clr-black: #000;
+$clr-light-grey: #c5c5c5;
+$clr-pastel-light-green: #E3FFF7;
+$clr-pastel-red-orange: #FFEAE5;
+$clr-pastel-pink: #FFE2F0;
+$clr-pastel-purple: #E4D7F2;
+$clr-pastel-orange: #FFE8CD;
+$clr-pastel-green: #D1F3D6;
+$clr-pastel-primary:#DCE9FF;
+$clr-pastel-secondary: #D6F4FF;
+
+// Fonts
+$font-primary: 'outfit', sans-serif;
+$font-secondary: 'indie flower', 'comic sans';
+
+// Heading font sizes
+$fs-h1: clamp(2.25rem, 1.6338028169014085rem + 2.629107981220657vw, 4rem);
+$fs-h2: $fs-h1;
+$fs-h3: clamp(2rem, 1.823943661971831rem + 0.7511737089201878vw, 2.5rem);
+
+// Display font sizes
+$fs-display: clamp(2.5rem, 1.267605633802817rem + 5.258215962441314vw, 6rem);
+
+// Body fonts sizes
+$fs-xxl: clamp(2rem, 1.647887323943662rem + 1.5023474178403755vw, 3rem);
+$fs-lg: clamp(1.25rem, 1.1619718309859155rem + 0.3755868544600939vw, 1.5rem);
+$fs-md: clamp(1rem, 0.9119718309859155rem + 0.3755868544600939vw, 1.25rem);
+$fs-sm: 1rem;
+
+// Button font size
+$fs-button: clamp(0.875rem, 0.7869718309859155rem + 0.3755868544600939vw, 1.125rem);
+
+// Line height
+$lh-md: 1.5em;
+$lh-sm: 1em;
+
+// Font Weight
+$fw-300: 300;
+$fw-400: 400;
+$fw-700: 700;
+
+// Spacing
+$base: 1rem;
+$sp-0_5: $base * 0.5;
+$sp-1: $base * 1;
+$sp-1_5: $base * 1.5;
+$sp-2: $base * 2;
+$sp-2_5: $base * 2.5;
+$sp-3: $base * 3;
+$sp-3_5: $base * 3.5;
+$sp-4: $base * 4;
+$sp-4_5: $base * 4.5;
+$sp-5: $base * 5;
+$sp-5_5: $base * 5.5;
+$sp-6: $base * 6;
+$sp-6_5: $base * 6.5;
+$sp-7: $base * 7;
+$sp-7_5: $base * 7_5;
+$sp-8: $base * 8;
+$sp-12: $base * 12;
+
+// Border redius
+$br-100: 100px;
+$br-1: 1rem;
+$br-2: clamp(1rem, 0.647887323943662rem + 1.5023474178403755vw, 2rem);
+$br-4: clamp(1rem, -0.05633802816901401rem + 4.507042253521126vw, 4rem);
+
+// Spacing
+$sp-section: clamp(2rem, 1.295774647887324rem + 3.004694835680751vw, 4rem);
+$sp-container: clamp(1rem, 0.647887323943662rem + 1.5023474178403755vw, 2rem);
+$sp-button-margin: clamp(1.125rem, 0.8169014084507042rem + 1.3145539906103285vw, 2rem);
+$sp-cta-top: clamp(8rem, 18.816901408450704rem + -12.018779342723004vw, 16rem);
+$sp-cta-vertical: clamp(2rem, -0.11267605633802802rem + 9.014084507042252vw, 8rem);
+$sp-cta-horizontal: clamp(1rem, -1.1786971830985915rem + 9.295774647887324vw, 7.1875rem);
+$sp-tile: clamp(1rem, 0.823943661971831rem + 0.7511737089201878vw, 1.5rem);
+$sp-testimonials: clamp(1rem, 0.295774647887324rem + 3.004694835680751vw, 3rem);

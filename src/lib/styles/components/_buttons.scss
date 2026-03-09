@@ -1,0 +1,18 @@
+@use '$lib/styles/abstracts' as a;
+
+.button.button--white {
+    background-color: a.$clr-white;
+    color: a.$clr-primary;
+
+    &:hover {
+        background-color: a.$clr-secondary;
+        color: a.$clr-white;
+    }
+
+    &--hover-bg-primary {
+    
+        &:hover {
+            background-color: a.$clr-primary;
+        }
+    }
+}

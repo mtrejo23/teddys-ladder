@@ -5,7 +5,7 @@
 <section class="video">
     <div class="container">
         <div class="video__wrapper flex flex--items-center flex--justify-center">
-            <video src="/teddys-ladder.mp4" autoplay muted loop></video>
+            <video src="https://res.cloudinary.com/dvrjnbjx2/video/upload/v1773090540/teddys-ladder_ktdjp8.mp4" autoplay muted loop></video>
             <div class="video__bg-overlay"></div>
             <div class="video__content text-align-center">
                 <h2>Can Your Child Do This?<br>Ours Can</h2>

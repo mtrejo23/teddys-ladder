@@ -104,10 +104,10 @@
         </div>
         <div class="facility__images-wrapper" bind:this={wrapperEl}>
             <div class="facility__images-track flex gap-0_5" bind:this={trackEl}>
-                <img src="/facility-01.jpg" alt="" class="facility__image">
-                <img src="/facility-02.jpg" alt="" class="facility__image">
-                <img src="/facility-03.jpg" alt="" class="facility__image">
-                <img src="/facility-04.jpg" alt="" class="facility__image">
+                <img src="https://res.cloudinary.com/dvrjnbjx2/image/upload/v1773090298/facility-01_bfpp6p.jpg" alt="" class="facility__image">
+                <img src="https://res.cloudinary.com/dvrjnbjx2/image/upload/v1773090298/facility-02_ts6s2g.jpg" alt="" class="facility__image">
+                <img src="https://res.cloudinary.com/dvrjnbjx2/image/upload/v1773090298/facility-03_xgghbh.jpg" alt="" class="facility__image">
+                <img src="https://res.cloudinary.com/dvrjnbjx2/image/upload/v1773090298/facility-04_o5voqv.jpg" alt="" class="facility__image">
             </div>
         </div>
     </div>

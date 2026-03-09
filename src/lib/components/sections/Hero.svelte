@@ -18,7 +18,7 @@
     <div class="container">
         <div class="grid md:grid--cols-12 gap-0_5">
             <div class="hero__avatar">
-                <img src="/giuliana.png" alt="Giuliana" class="hero__image">
+                <img src="https://res.cloudinary.com/dvrjnbjx2/image/upload/v1773090298/giuliana_we6ufc.png" alt="Giuliana" class="hero__image">
             </div>
             <div class="hero__content">
                 <h1 class="hero__title text-align-center md:text-align-left">Can Your Four Year Old Read This?<br><span>Ours Can.<sup>TM</sup></span></h1>

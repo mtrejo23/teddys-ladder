@@ -104,7 +104,7 @@
     ctaButtonText= "Our Approach"
     ctaHref= "/"
     ctaClass= "cta--intro"
-    ctaBgImage= "/cta-bg-01.jpg"
+    ctaBgImage= "https://res.cloudinary.com/dvrjnbjx2/image/upload/v1773090298/cta-bg-01_saucuh.jpg"
 />
 <Programs
     programsTitle= "Teddy's Ladder Programs"
@@ -113,7 +113,7 @@
     programsCtaButtonText= "Schedule A Tour"
     programsCtaButtonHref= "/"
     programsCtaClass= "cta--teddys-ladder"
-    programsCtaBgImage= "/cta-bg-02.jpg"
+    programsCtaBgImage= "https://res.cloudinary.com/dvrjnbjx2/image/upload/v1773090298/cta-bg-02_b1fker.jpg"
     programsCtaButtonClass= "button--white"
     programsTeddysLadder={programTeddysLadder}
 />
@@ -125,7 +125,7 @@
     programsCtaButtonText= "Schedule A Tour"
     programsCtaButtonHref= "/"
     programsCtaClass="cta--teddys-juniors"
-    programsCtaBgImage= "/cta-bg-03.jpg"
+    programsCtaBgImage= "https://res.cloudinary.com/dvrjnbjx2/image/upload/v1773090298/cta-bg-03_wo0vux.jpg"
     programsCtaButtonClass= "button--white button--white--hover-bg-primary"
     programsTeddysJuniors={programsTeddysJuniors}
 />

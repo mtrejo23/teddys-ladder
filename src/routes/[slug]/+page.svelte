@@ -2,9 +2,9 @@
     import PageTitle from '$lib/components/sections/PageTitle.svelte'
     import PageBuilder from '$lib/components/PageBuilder.svelte'
     import SEO from '$lib/components/SEO.svelte'
-    import type { PageData, ActionData } from './$types'
+    import type { PageData } from './$types'
 
-    let { data, form }: { data: PageData; form?: ActionData } = $props()
+    let { data }: { data: PageData } = $props()
 </script>
 
 <SEO
@@ -13,4 +13,4 @@
 />
 
 <PageTitle title={data.page.title} />
-<PageBuilder page={data.page} color={data.page.color} {form} />
+<PageBuilder page={data.page} color={data.page.color}/>

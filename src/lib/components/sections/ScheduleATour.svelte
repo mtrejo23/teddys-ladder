@@ -1,18 +1,49 @@
 <script lang="ts">
     import Button from '$lib/components/ui/Button.svelte';
-    import { enhance } from '$app/forms';
     import { PortableText } from '@portabletext/svelte';
 
     let {
         locationInfo,
-        form
     } = $props<{
         locationInfo?: any[];
-        form: Record<string, any> | null;
     }>();
 
     let submitting = $state(false);
     let submitted = $state(false);
+    let errors = $state<Record<string, string[]>>({});
+    let values = $state<Record<string, string>>({});
+    let errorMessage = $state('');
+
+    async function handleSubmit(e: SubmitEvent) {
+        e.preventDefault();
+        submitting = true;
+        errors = {};
+        errorMessage = '';
+
+        const formData = new FormData(e.currentTarget as HTMLFormElement);
+
+        try {
+            const res = await fetch('/api/schedule-a-tour', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const result = await res.json();
+
+            if (res.status === 429) {
+                errorMessage = result.error;
+            } else if (res.status === 400) {
+                errors = result.errors ?? {};
+                values = result.values ?? {};
+            } else if (result.success) {
+                submitted = true;
+            }
+        } catch {
+            errorMessage = 'Something went wrong. Please try again.';
+        } finally {
+            submitting = false;
+        }
+    }
 </script>
 
 <section class="schedule-a-tour">
@@ -33,21 +64,7 @@
                             <p>Thank you! We'll be in touch soon to confirm your tour.</p>
                         </div>
                     {:else}
-
-                        <form
-                            method="POST"
-                            use:enhance={() => {
-                                submitting = true;
-                                return async ({ result, update }) => {
-                                    submitting = false;
-                                    if (result.type === 'success') {
-                                        submitted = true;
-                                    } else {
-                                        await update();
-                                    }
-                                };
-                            }}
-                        >
+                        <form onsubmit={handleSubmit}>
 
                             <div class="visually-hidden" aria-hidden="true">
                                 <label for="website">Website</label>
@@ -67,11 +84,11 @@
                                         type="text"
                                         id="first_name"
                                         name="first_name"
-                                        value={form?.values?.first_name ?? ''}
-                                        class:input--error={form?.errors?.first_name}
+                                        value={values?.first_name ?? ''}
+                                        class:input--error={errors?.first_name}
                                     />
-                                    {#if form?.errors?.first_name}
-                                        <span class="field-error">{form.errors.first_name[0]}</span>
+                                    {#if errors?.first_name}
+                                        <span class="field-error">{errors.first_name[0]}</span>
                                     {/if}
                                 </div>
 
@@ -81,11 +98,11 @@
                                         type="text"
                                         id="last_name"
                                         name="last_name"
-                                        value={form?.values?.last_name ?? ''}
-                                        class:input--error={form?.errors?.last_name}
+                                        value={values?.last_name ?? ''}
+                                        class:input--error={errors?.last_name}
                                     />
-                                    {#if form?.errors?.last_name}
-                                        <span class="field-error">{form.errors.last_name[0]}</span>
+                                    {#if errors?.last_name}
+                                        <span class="field-error">{errors.last_name[0]}</span>
                                     {/if}
                                 </div>
 
@@ -95,11 +112,11 @@
                                         type="email"
                                         id="email"
                                         name="email"
-                                        value={form?.values?.email ?? ''}
-                                        class:input--error={form?.errors?.email}
+                                        value={values?.email ?? ''}
+                                        class:input--error={errors?.email}
                                     />
-                                    {#if form?.errors?.email}
-                                        <span class="field-error">{form.errors.email[0]}</span>
+                                    {#if errors?.email}
+                                        <span class="field-error">{errors.email[0]}</span>
                                     {/if}
                                 </div>
 
@@ -110,8 +127,8 @@
                                         id="phone"
                                         name="phone"
                                         maxlength="12"
-                                        value={form?.values?.phone ?? ''}
-                                        class:input--error={form?.errors?.phone}
+                                        value={values?.phone ?? ''}
+                                        class:input--error={errors?.phone}
                                         oninput={(e) => {
                                             let v = e.currentTarget.value.replace(/\D/g, '').slice(0, 10);
                                             if (v.length > 6) v = v.slice(0,3) + '-' + v.slice(3,6) + '-' + v.slice(6);
@@ -119,29 +136,29 @@
                                             e.currentTarget.value = v;
                                         }}
                                     />
-                                    {#if form?.errors?.phone}
-                                        <span class="field-error">{form.errors.phone[0]}</span>
+                                    {#if errors?.phone}
+                                        <span class="field-error">{errors.phone[0]}</span>
                                     {/if}
                                 </div>
 
                                 <div class="lg:grid--span-2">
-                                    <fieldset class="flex gap-1" class:input--error={form?.errors?.contact_method}>
+                                    <fieldset class="flex gap-1" class:input--error={errors?.contact_method}>
                                         <legend>Preferred Contact Method</legend>
                                         <label class="flex flex--items-center gap-0_5">
                                             <input type="radio" name="contact_method" value="email"
-                                                checked={form?.values?.contact_method === 'email'} /> Email
+                                                checked={values?.contact_method === 'email'} /> Email
                                         </label>
                                         <label class="flex flex--items-center gap-0_5">
                                             <input type="radio" name="contact_method" value="phone"
-                                                checked={form?.values?.contact_method === 'phone'} /> Phone
+                                                checked={values?.contact_method === 'phone'} /> Phone
                                         </label>
                                         <label class="flex flex--items-center gap-0_5">
                                             <input type="radio" name="contact_method" value="text"
-                                                checked={form?.values?.contact_method === 'text'} /> Text
+                                                checked={values?.contact_method === 'text'} /> Text
                                         </label>
                                     </fieldset>
-                                    {#if form?.errors?.contact_method}
-                                        <span class="field-error">{form.errors.contact_method[0]}</span>
+                                    {#if errors?.contact_method}
+                                        <span class="field-error">{errors.contact_method[0]}</span>
                                     {/if}
                                 </div>
 
@@ -151,11 +168,11 @@
                                         type="date"
                                         id="tour_date"
                                         name="tour_date"
-                                        value={form?.values?.tour_date ?? ''}
-                                        class:input--error={form?.errors?.tour_date}
+                                        value={values?.tour_date ?? ''}
+                                        class:input--error={errors?.tour_date}
                                     />
-                                    {#if form?.errors?.tour_date}
-                                        <span class="field-error">{form.errors.tour_date[0]}</span>
+                                    {#if errors?.tour_date}
+                                        <span class="field-error">{errors.tour_date[0]}</span>
                                     {/if}
                                 </div>
 
@@ -165,11 +182,11 @@
                                         type="date"
                                         id="start_date"
                                         name="start_date"
-                                        value={form?.values?.start_date ?? ''}
-                                        class:input--error={form?.errors?.start_date}
+                                        value={values?.start_date ?? ''}
+                                        class:input--error={errors?.start_date}
                                     />
-                                    {#if form?.errors?.start_date}
-                                        <span class="field-error">{form.errors.start_date[0]}</span>
+                                    {#if errors?.start_date}
+                                        <span class="field-error">{errors.start_date[0]}</span>
                                     {/if}
                                 </div>
 
@@ -179,21 +196,21 @@
                                         <div class="flex flex--column">
                                             <label for="child1_name">Child's Name</label>
                                             <input type="text" id="child1_name" name="child1_name"
-                                                value={form?.values?.child1_name ?? ''}
-                                                class:input--error={form?.errors?.child1_name}
+                                                value={values?.child1_name ?? ''}
+                                                class:input--error={errors?.child1_name}
                                             />
-                                            {#if form?.errors?.child1_name}
-                                                <span class="field-error">{form.errors.child1_name[0]}</span>
+                                            {#if errors?.child1_name}
+                                                <span class="field-error">{errors.child1_name[0]}</span>
                                             {/if}
                                         </div>
                                         <div class="flex flex--column">
                                             <label for="child1_dob">Desired Student's Birthdate</label>
                                             <input type="date" id="child1_dob" name="child1_dob"
-                                                value={form?.values?.child1_dob ?? ''}
-                                                class:input--error={form?.errors?.child1_dob}
+                                                value={values?.child1_dob ?? ''}
+                                                class:input--error={errors?.child1_dob}
                                             />
-                                            {#if form?.errors?.child1_dob}
-                                                <span class="field-error">{form.errors.child1_dob[0]}</span>
+                                            {#if errors?.child1_dob}
+                                                <span class="field-error">{errors.child1_dob[0]}</span>
                                             {/if}
                                         </div>
                                     </fieldset>
@@ -204,11 +221,11 @@
                                         <legend>Child 2</legend>
                                         <div class="flex flex--column">
                                             <label for="child2_name">Child's Name</label>
-                                            <input type="text" id="child2_name" name="child2_name" value={form?.values?.child2_name ?? ''} />
+                                            <input type="text" id="child2_name" name="child2_name" value={values?.child2_name ?? ''} />
                                         </div>
                                         <div class="flex flex--column">
                                             <label for="child2_dob">Desired Student's Birthdate</label>
-                                            <input type="date" id="child2_dob" name="child2_dob" value={form?.values?.child2_dob ?? ''} />
+                                            <input type="date" id="child2_dob" name="child2_dob" value={values?.child2_dob ?? ''} />
                                         </div>
                                     </fieldset>
                                 </div>
@@ -218,11 +235,11 @@
                                         <legend>Child 3</legend>
                                         <div class="flex flex--column">
                                             <label for="child3_name">Child's Name</label>
-                                            <input type="text" id="child3_name" name="child3_name" value={form?.values?.child3_name ?? ''} />
+                                            <input type="text" id="child3_name" name="child3_name" value={values?.child3_name ?? ''} />
                                         </div>
                                         <div class="flex flex--column">
                                             <label for="child3_dob">Desired Student's Birthdate</label>
-                                            <input type="date" id="child3_dob" name="child3_dob" value={form?.values?.child3_dob ?? ''} />
+                                            <input type="date" id="child3_dob" name="child3_dob" value={values?.child3_dob ?? ''} />
                                         </div>
                                     </fieldset>
                                 </div>
@@ -230,13 +247,13 @@
                                 <div class="lg:grid--span-2">
                                     <div class="flex flex--column">
                                         <label for="comments">Comments</label>
-                                        <textarea id="comments" name="comments">{form?.values?.comments ?? ''}</textarea>
+                                        <textarea id="comments" name="comments">{values?.comments ?? ''}</textarea>
                                     </div>
                                 </div>
                             </div>
 
-                            {#if form?.error}
-                                <div class="form-error-banner">{form.error}</div>
+                            {#if errorMessage}
+                                <div class="form-error-banner">{errorMessage}</div>
                             {/if}
 
                             <div class="button-wrapper flex flex--justify-end">

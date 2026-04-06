@@ -7,8 +7,9 @@ import { client } from "./client";
 const builder = createImageUrlBuilder(client);
 
 export function urlFor(source: SanityImageSource) {
-    return builder
-        .image(source)
-        .url()
-        .replace("https://cdn.sanity.io", "/sanity-assets");
+    return builder.image(source);
+}
+
+export function sanityUrl(url: string) {
+    return url.replace("https://cdn.sanity.io", "/sanity-assets");
 }

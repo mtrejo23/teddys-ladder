@@ -1,20 +1,24 @@
 <script lang="ts">
-    import Button from '$lib/components/ui/Button.svelte';
+    import Button from '$lib/components/ui/Button.svelte'
     import Image from '$lib/components/ui/Image.svelte'
     import { onMount, tick } from 'svelte';
     import { gsap } from 'gsap';
-    import { PortableText } from '@portabletext/svelte';
 
     let {
         title,
         description,
-        button,
-        images
+        slug,
+        images,
     } = $props<{
         title: string;
-        description: any[];
-        button?: { buttonText: string; href: string };
-        images: { asset: any; alt: string; width: number; height: number }[];
+        description?: string;
+        slug: string;
+        images: {
+            asset: any;
+            alt: string;
+            width: number;
+            height: number;
+        }[];
     }>();
 
     let wrapperEl = $state<HTMLElement | null>(null);
@@ -31,14 +35,11 @@
 
             await tick();
 
-            // Wait for all images to load before calculating dimensions
             await Promise.all(
                 Array.from(trackEl!.querySelectorAll('img')).map(img =>
                     img.complete ? Promise.resolve() : new Promise(res => img.addEventListener('load', res, { once: true }))
                 )
             );
-
-            const maxScroll = trackEl!.scrollWidth - wrapperEl!.offsetWidth;
 
             ctx = gsap.context(() => {
                 ScrollTrigger.matchMedia({
@@ -118,18 +119,20 @@
         <div class="grid lg:grid--cols-12 gap-0_5">
             <div class="section__intro">
                 <h2>{title}</h2>
-                <PortableText value={description} />
-                <div class="button-wrapper">
-                    <Button
-                        href={button.href}
-                        text={button.buttonText}
-                    />
-                </div>
+                {#if description}
+                    <p>{description}</p>
+                {/if}
+
+                <Button
+                    href="/fun-and-celebrations/{slug}"
+                    text="View Gallery"
+                />
+                
             </div>
         </div>
         <div class="facility__images-wrapper" bind:this={wrapperEl}>
             <div class="facility__images-track flex gap-0_5" bind:this={trackEl}>
-                {#each images as image}
+                {#each (images ?? []).filter((img: { asset: any }) => img.asset) as image}
                     <Image
                         image={image}
                         sizes="(max-width: 768px) 100vw, 33vw"

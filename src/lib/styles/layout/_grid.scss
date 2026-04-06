@@ -14,6 +14,10 @@
     @for $i from 2 through 12 {
         &--rows-#{$i} { grid-template-rows: repeat(#{$i}, 1fr); }
     }
+
+    @for $i from 1 through 12 {
+        &--span-#{$i} { grid-column: span #{$i}; }
+    }
   }
 }
 

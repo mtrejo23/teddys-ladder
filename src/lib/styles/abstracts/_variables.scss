@@ -1,21 +1,23 @@
 // Colors
 $clr-primary: #002157;
-$clr-secondary: #1DA1F2;
+$clr-secondary: #1da1f2;
 $clr-white: #fff;
 $clr-black: #000;
+$clr-grey: #888;
 $clr-light-grey: #c5c5c5;
-$clr-pastel-light-green: #E3FFF7;
-$clr-pastel-red-orange: #FFEAE5;
-$clr-pastel-pink: #FFE2F0;
-$clr-pastel-purple: #E4D7F2;
-$clr-pastel-orange: #FFE8CD;
-$clr-pastel-green: #D1F3D6;
-$clr-pastel-primary:#DCE9FF;
-$clr-pastel-secondary: #D6F4FF;
+$clr-lighter-grey: #f5f5f5;
+$clr-pastel-light-green: #e3fff7;
+$clr-pastel-red-orange: #ffeae5;
+$clr-pastel-pink: #ffe2f0;
+$clr-pastel-purple: #e4d7f2;
+$clr-pastel-orange: #ffe8cd;
+$clr-pastel-green: #d1f3d6;
+$clr-pastel-primary: #dce9ff;
+$clr-pastel-secondary: #d6f4ff;
 
 // Fonts
-$font-primary: 'outfit', sans-serif;
-$font-secondary: 'indie flower', 'comic sans';
+$font-primary: "outfit", sans-serif;
+$font-secondary: "indie flower", "comic sans";
 
 // Heading font sizes
 $fs-h1: clamp(2.25rem, 1.6338028169014085rem + 2.629107981220657vw, 4rem);
@@ -30,9 +32,14 @@ $fs-xxl: clamp(2rem, 1.647887323943662rem + 1.5023474178403755vw, 3rem);
 $fs-lg: clamp(1.25rem, 1.1619718309859155rem + 0.3755868544600939vw, 1.5rem);
 $fs-md: clamp(1rem, 0.9119718309859155rem + 0.3755868544600939vw, 1.25rem);
 $fs-sm: 1rem;
+$fs-xs: 0.75rem;
 
 // Button font size
-$fs-button: clamp(0.875rem, 0.7869718309859155rem + 0.3755868544600939vw, 1.125rem);
+$fs-button: clamp(
+    0.875rem,
+    0.7869718309859155rem + 0.3755868544600939vw,
+    1.125rem
+);
 
 // Line height
 $lh-md: 1.5em;
@@ -46,6 +53,7 @@ $fw-700: 700;
 // Spacing
 $base: 1rem;
 $sp-0_5: $base * 0.5;
+$sp-0_75: $base * 0.75;
 $sp-1: $base * 1;
 $sp-1_5: $base * 1.5;
 $sp-2: $base * 2;
@@ -65,6 +73,7 @@ $sp-12: $base * 12;
 
 // Border redius
 $br-100: 100px;
+$br-0_5: 0.5rem;
 $br-1: 1rem;
 $br-2: clamp(1rem, 0.647887323943662rem + 1.5023474178403755vw, 2rem);
 $br-4: clamp(1rem, -0.05633802816901401rem + 4.507042253521126vw, 4rem);
@@ -72,9 +81,21 @@ $br-4: clamp(1rem, -0.05633802816901401rem + 4.507042253521126vw, 4rem);
 // Spacing
 $sp-section: clamp(2rem, 1.295774647887324rem + 3.004694835680751vw, 4rem);
 $sp-container: clamp(1rem, 0.647887323943662rem + 1.5023474178403755vw, 2rem);
-$sp-button-margin: clamp(1.125rem, 0.8169014084507042rem + 1.3145539906103285vw, 2rem);
+$sp-button-margin: clamp(
+    1.125rem,
+    0.8169014084507042rem + 1.3145539906103285vw,
+    2rem
+);
 $sp-cta-top: clamp(8rem, 18.816901408450704rem + -12.018779342723004vw, 16rem);
-$sp-cta-vertical: clamp(2rem, -0.11267605633802802rem + 9.014084507042252vw, 8rem);
-$sp-cta-horizontal: clamp(1rem, -1.1786971830985915rem + 9.295774647887324vw, 7.1875rem);
+$sp-cta-vertical: clamp(
+    2rem,
+    -0.11267605633802802rem + 9.014084507042252vw,
+    8rem
+);
+$sp-cta-horizontal: clamp(
+    1rem,
+    -1.1786971830985915rem + 9.295774647887324vw,
+    7.1875rem
+);
 $sp-tile: clamp(1rem, 0.823943661971831rem + 0.7511737089201878vw, 1.5rem);
-$sp-testimonials: clamp(1rem, 0.295774647887324rem + 3.004694835680751vw, 3rem);
+$sp-large-card: clamp(1rem, 0.295774647887324rem + 3.004694835680751vw, 3rem);

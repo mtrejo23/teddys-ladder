@@ -4,26 +4,21 @@
             <div class="footer__brand">
                 <img src="/teddys-ladder-logo.svg" alt="">
             </div>
-            <div class="footer__nav grid grid--cols-2 md:grid--cols-8 gap-0_5">
+            <div class="footer__nav grid grid--cols-2 md:grid--cols-6 gap-0_5">
                 <div class="footer__nav__column flex flex--column">
                     <a href="/" class="footer__nav__link">Home</a>
                     <a href="/" class="footer__nav__link">Programs</a>
-                    <a href="/" class="footer__nav__link">Curriculum</a>
-                </div>
-                <div class="footer__nav__column flex flex--column">
-                    <a href="/" class="footer__nav__link">Teddy's Readers</a>
                     <a href="/" class="footer__nav__link">Campus</a>
-                    <a href="/" class="footer__nav__link">About Teddy's Ladder</a>
                 </div>
                 <div class="footer__nav__column flex flex--column">
+                    <a href="/" class="footer__nav__link">About Us</a>
                     <a href="/" class="footer__nav__link">Fun & Celebrations</a>
                     <a href="/" class="footer__nav__link">Calendar & Newsletter</a>
-                    <a href="/" class="footer__nav__link">Testimonials</a>
                 </div>
                 <div class="footer__nav__column flex flex--column">
+                    <a href="/" class="footer__nav__link">Testimonials</a>
                     <a href="/" class="footer__nav__link">Registration</a>
                     <a href="/" class="footer__nav__link">Privacy Policy</a>
-                    <a href="/" class="footer__nav__link">Terms of Use</a>
                 </div>
             </div>
         </div>
@@ -62,7 +57,7 @@
 
         @include a.min(lg) {
             grid-row-start: 1;
-            grid-column-start: 5;
+            grid-column-start: 7;
             grid-column-end: 13;
         }
 
@@ -78,12 +73,14 @@
             text-decoration: none;
         }
     }
+
     &__bar {
         background-color: a.$clr-pastel-secondary;
         padding: a.$sp-1;
         margin-top: a.$sp-section;
         border-radius: a.$br-1;
     }
+    
     &__copyright {
         font-size: a.$fs-sm;
         margin-bottom: 0;

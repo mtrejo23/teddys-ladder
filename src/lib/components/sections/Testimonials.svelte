@@ -1,25 +1,19 @@
 <script lang="ts">
     import Button from '$lib/components/ui/Button.svelte'
+    import { PortableText } from '@portabletext/svelte';
     import { onMount } from 'svelte';
 
-    const testimonials = [
-        {
-            quote: "Love this school, the staff and curriculum. My son is learning so much and thriving. Beth is on top of everything, Ms. Shannon is amazing, Ms Dani is attentive, Ashley is always so professional and sweet, the entire staff is great! I highly recommend this school.",
-            byline: "Araina Jefferson"
-        },
-        {
-            quote: "Our daughters attended Teddy's Ladder since 2018 and we've been very pleased with the school. Our oldest attended Kindergarten there and was well-prepared for elementary school. Everyone compliments her on how well she can read. The staff and teachers take great care of the kids. The school is well maintained and provides great in-house activities for the children. We toured many schools in the area and are happy that we chose Teddy's Ladder.",
-            byline: "Jamal and Evanna"
-        },
-        {
-            quote: "The teachers here are incredible. My daughter looks forward to going to school every single day, which says everything. The learning environment is warm, structured, and truly nurturing.",
-            byline: "Monica R."
-        },
-        {
-            quote: "Teddy's Ladder gave my son the confidence he needed going into kindergarten. He could already read simple sentences and knew basic math. The foundation they built was invaluable.",
-            byline: "David & Keisha T."
-        }
-    ];
+    let {
+        title,
+        description,
+        testimonials,
+        button
+    }   = $props<{
+            title: string;
+            description: any[];
+            testimonials: { testimonial: string, byline: string }[];
+            button?: { buttonText: string; href: string };
+    }>();
 
     let currentIndex = $state(0);
     let isDesktop = $state(false);
@@ -54,8 +48,8 @@
     <div class="container flex flex--column gap-section">
         <div class="grid lg:grid--cols-12 gap-0_5">
             <div class="section__intro">
-                <h2>What Parents Say</h2>
-                <p>Hear directly from families who have watched their children grow academically and socially through Teddy's Ladder's structured, supportive learning environment.</p>
+                <h2>{title}</h2>
+                <PortableText value={description} />
             </div>
         </div>
         <div class="testimonials__wrapper">
@@ -64,19 +58,29 @@
                     class="testimonials__track"
                     style="transform: translateX(calc(-{currentIndex} * (100% / {slidesPerView} + var(--gap) / {slidesPerView})))"
                 >
+
                     {#each testimonials as testimonial, i}
                         <div class="testimonials__card" style="--slides: {slidesPerView}">
-                            <p class="testimonials__quote">"{testimonial.quote}"</p>
+                            <p class="testimonials__quote">"{testimonial.testimonial}"</p>
                             <p class="testimonials__byline">- {testimonial.byline}</p>
                         </div>
                     {/each}
+
                 </div>
             </div>
             <div class="testimonials__controls flex flex--items-start flex--justify-between">
-                <Button href="/" text="Hear From More Parents" />
+
+                {#if button}
+                    <Button
+                        href={button.href}
+                        text={button.buttonText}
+                    />
+                {/if}
+
                 <div class="testimonials__nav">
+
                     <button
-                        class="testimonials__nav__prev"
+                        class={"testimonials__nav__prev"}
                         aria-label="Previous"
                         onclick={prev}
                         disabled={currentIndex === 0}
@@ -86,6 +90,7 @@
                             <path d="M29.6689 33.3379L22.3313 26.0002L29.6689 18.6625" stroke="white" stroke-width="2"/>
                         </svg>
                     </button>
+
                     <button
                         class="testimonials__nav__next"
                         aria-label="Next"
@@ -97,6 +102,7 @@
                             <path d="M22.3311 18.6621L29.6687 25.9998L22.3311 33.3375" stroke="white" stroke-width="2"/>
                         </svg>
                     </button>
+
                 </div>
             </div>
         </div>
@@ -120,7 +126,7 @@
     }
 
     &__card {
-        padding: a.$sp-testimonials;
+        padding: a.$sp-large-card;
         border-radius: a.$br-2;
         font-size: a.$fs-lg;
         line-height: a.$lh-md;

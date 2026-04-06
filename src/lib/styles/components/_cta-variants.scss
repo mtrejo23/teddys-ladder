@@ -1,8 +1,25 @@
 @use '$lib/styles/abstracts' as a;
 
-.cta {
-    &--intro {
-        padding-top: 0;
+.cta.cta--intro {
+    padding-top: 0;
+    .cta__wrapper {
+        background-color: a.$clr-pastel-secondary;
+
+        .cta__title {
+            color: a.$clr-primary;
+        }
+        
+        .cta__description {
+            color: a.$clr-black;
+        }
+
+        .cta__bg-gradient {
+            background: linear-gradient(0deg, a.$clr-pastel-secondary 50%, rgba(214, 244, 255, calc(var(--gradient-alpha, 0))) 100%);
+
+            @include a.min(md) {
+                background: linear-gradient(90deg, a.$clr-pastel-secondary 50%, rgba(214, 244, 255, calc(var(--gradient-alpha, 0))) 100%);
+            }
+        }
     }
 }
 
@@ -10,16 +27,29 @@
 
     .cta__wrapper {
         background-color: a.$clr-primary;
-        
-        .cta__title,.cta__description {
-            color: a.$clr-white;
-        }
 
         .cta__bg-gradient {
-            background: linear-gradient(0deg, #002157 50%, rgba(0, 33, 87, calc(var(--gradient-alpha, 0))) 100%);
+            background: linear-gradient(0deg, a.$clr-primary 50%, rgba(0, 33, 87, calc(var(--gradient-alpha, 0))) 100%);
 
             @include a.min(md) {
-                background: linear-gradient(90deg, #002157 50%, rgba(0, 33, 87, calc(var(--gradient-alpha, 0))) 100%);
+                background: linear-gradient(90deg, a.$clr-primary 50%, rgba(0, 33, 87, calc(var(--gradient-alpha, 0))) 100%);
+            }
+        }
+    }
+    
+}
+
+.cta.cta--teddys-ladder-flush-top {
+    padding-top: 0;
+
+    .cta__wrapper {
+        background-color: a.$clr-primary;
+
+        .cta__bg-gradient {
+            background: linear-gradient(0deg, a.$clr-primary 50%, rgba(0, 33, 87, calc(var(--gradient-alpha, 0))) 100%);
+
+            @include a.min(md) {
+                background: linear-gradient(90deg, a.$clr-primary 50%, rgba(0, 33, 87, calc(var(--gradient-alpha, 0))) 100%);
             }
         }
     }
@@ -36,10 +66,31 @@
         }
 
         .cta__bg-gradient {
-            background: linear-gradient(0deg, #1DA1F2 50%, rgba(29, 161, 242, calc(var(--gradient-alpha, 0))) 100%);
+            background: linear-gradient(0deg, a.$clr-secondary 50%, rgba(29, 161, 242, calc(var(--gradient-alpha, 0))) 100%);
 
             @include a.min(md) {
-                background: linear-gradient(90deg, #1DA1F2 50%, rgba(29, 161, 242, calc(var(--gradient-alpha, 0))) 100%);
+                background: linear-gradient(90deg, a.$clr-secondary 50%, rgba(29, 161, 242, calc(var(--gradient-alpha, 0))) 100%);
+            }
+        }
+    }
+    
+}
+
+.cta.cta--teddys-juniors-flush-top {
+    padding-top: 0;
+
+    .cta__wrapper {
+        background-color: a.$clr-secondary;
+        
+        .cta__title,.cta__description {
+            color: a.$clr-white;
+        }
+
+        .cta__bg-gradient {
+            background: linear-gradient(0deg, a.$clr-secondary 50%, rgba(29, 161, 242, calc(var(--gradient-alpha, 0))) 100%);
+
+            @include a.min(md) {
+                background: linear-gradient(90deg, a.$clr-secondary 50%, rgba(29, 161, 242, calc(var(--gradient-alpha, 0))) 100%);
             }
         }
     }

@@ -1,4 +1,4 @@
-@use '../abstracts/variables' as a;
+@use "../abstracts/variables" as a;
 
 html {
     box-sizing: border-box;
@@ -34,6 +34,10 @@ button {
     padding: 0;
     background-color: transparent;
     border: 0;
+}
+
+a {
+    color: a.$clr-black;
 }
 
 .button-wrapper {

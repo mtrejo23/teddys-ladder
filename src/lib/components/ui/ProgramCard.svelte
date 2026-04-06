@@ -1,19 +1,21 @@
 <script lang="ts">
-    let { programTitle, programAges, programDescription, programHref, programButtonText } = $props<{
+    let { programTitle, programAges, programDescription, programHref, programButtonText, programColor } = $props<{
         programTitle: string;
-        programAges: String;
-        programDescription: String;
+        programAges: string;
+        programDescription: string;
         programHref: string;
         programButtonText: string;
+        programColor?: string;
     }>();
 
-    let cardWidth = $state(0); // Bound to the card's rendered width
-    let minHeight = $derived(cardWidth); // Enforces 1:1 aspect ratio as a minimum height
+    let cardWidth = $state(0);
+    let minHeight = $derived(cardWidth);
 </script>
 
 <a 
     href={programHref} 
     class="program-card flex flex--column flex--justify-between gap-1"
+    data-color={programColor}
     bind:clientWidth={cardWidth}
     style:min-height="{minHeight}px"
 >
@@ -42,7 +44,6 @@
 
 <style lang="scss">
 @use '$lib/styles/abstracts' as a;
-@use 'sass:list';
 
 .program-card {
     padding: a.$sp-tile;
@@ -51,37 +52,14 @@
     color: a.$clr-black;
     transition: background-color .3s ease;
 
-    &:nth-child(8n + 1) {
-        background-color: a.$clr-pastel-light-green;
-    }
-
-    &:nth-child(8n + 2) {
-        background-color: a.$clr-pastel-red-orange;
-    }
-
-    &:nth-child(8n + 3) {
-        background-color: a.$clr-pastel-pink;
-    }
-
-    &:nth-child(8n + 4) {
-        background-color: a.$clr-pastel-purple;
-    }
-
-    &:nth-child(8n + 5) {
-        background-color: a.$clr-pastel-orange;
-    }
-
-    &:nth-child(8n + 6) {
-        background-color: a.$clr-pastel-green;
-    }
-
-    &:nth-child(8n + 7) {
-        background-color: a.$clr-pastel-primary;
-    }
-
-    &:nth-child(8n + 8) {
-        background-color: a.$clr-pastel-secondary;
-    }
+    &[data-color="pastel-light-green"] { background-color: a.$clr-pastel-light-green; }
+    &[data-color="pastel-red-orange"] { background-color: a.$clr-pastel-red-orange; }
+    &[data-color="pastel-pink"] { background-color: a.$clr-pastel-pink; }
+    &[data-color="pastel-purple"] { background-color: a.$clr-pastel-purple; }
+    &[data-color="pastel-orange"] { background-color: a.$clr-pastel-orange; }
+    &[data-color="pastel-green"] { background-color: a.$clr-pastel-green; }
+    &[data-color="pastel-primary"] { background-color: a.$clr-pastel-primary; }
+    &[data-color="pastel-secondary"] { background-color: a.$clr-pastel-secondary; }
 
     &:hover {
         background-color: a.$clr-secondary;

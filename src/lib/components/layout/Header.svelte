@@ -1,11 +1,19 @@
 <script lang="ts">
-    import Button from '$lib/components/ui/Button.svelte'
+    import Button from '$lib/components/ui/Button.svelte';
+    import { afterNavigate } from '$app/navigation';
 
     let isOpen = $state(false);
 
     function toggleMenu() {
         isOpen = !isOpen;
     }
+
+    afterNavigate(() => {
+        isOpen = false;
+        setTimeout(() => {
+            document.documentElement.scrollTop = 0;
+        }, 10);
+    });
 </script>
 
 <header class="header">
@@ -18,38 +26,35 @@
                 <nav id="primary-nav" class="header__nav flex flex--column flex--justify-end gap-3" class:open={isOpen}>
                     <ul>
                         <li class="text-align-right">
-                            <a href="/">Programs</a>
+                            <a href="/programs">Programs</a>
                         </li>
                         <li class="text-align-right">
-                            <a href="/">Curriculum</a>
+                            <a href="/campus">Campus</a>
                         </li>
                         <li class="text-align-right">
-                            <a href="/">Campus</a>
-                        </li>
-                        <li class="text-align-right">
-                            <a href="/">About Us</a>
+                            <a href="/about-teddys-ladder">About Teddy's Ladder</a>
                         </li>
                         <li class="text-align-right">
                             <a href="/">Calendar & Newsletter</a>
                         </li>
                         <li class="text-align-right">
-                            <a href="/">Fun & Celebrations</a>
+                            <a href="/fun-and-celebrations">Fun & Celebrations</a>
                         </li>
                         <li class="text-align-right">
-                            <a href="/">Testimonials</a>
+                            <a href="/testimonials">Testimonials</a>
                         </li>
                         <li class="text-align-right">
-                            <a href="/">Registration</a>
+                            <a href="/registration">Registration</a>
                         </li>
                     </ul>
                     <div class="header__nav__subnav text-align-right">
-                        <a href="/">Privacy Policy</a>
+                        <a href="/privacy-policy">Privacy Policy</a>
                     </div>
                 </nav>
                 <div class="header__schedule-tour-button">
 
                     <Button
-                        href="/"
+                        href="/schedule-a-tour"
                         text="Schedule A Tour"
                         class={isOpen ? 'open' : ''}
                     />
@@ -60,17 +65,17 @@
                     aria-label="Schedule A Tour"
                     >
                     <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="52" height="52" rx="26" fill="#1DA1F2"/>
-                    <path d="M19.5 17.7445H32.5C34.1569 17.7445 35.5 19.0877 35.5 20.7445V32.5004C35.4998 34.1571 34.1567 35.5004 32.5 35.5004H19.5C17.8433 35.5004 16.5002 34.1571 16.5 32.5004V20.7445C16.5 19.1394 17.7606 17.8287 19.3457 17.7484L19.5 17.7445Z" stroke="white" stroke-width="2"/>
-                    <line x1="15.7265" y1="22.864" x2="36.253" y2="22.864" stroke="white" stroke-width="2"/>
-                    <circle cx="21.0013" cy="26.7654" r="1.32541" fill="white"/>
-                    <circle cx="25.9898" cy="26.7654" r="1.32541" fill="white"/>
-                    <circle cx="30.9784" cy="26.7654" r="1.32541" fill="white"/>
-                    <circle cx="21.0013" cy="31.5621" r="1.32541" fill="white"/>
-                    <circle cx="25.9898" cy="31.5621" r="1.32541" fill="white"/>
-                    <circle cx="30.9784" cy="31.5621" r="1.32541" fill="white"/>
-                    <path d="M19.6758 16.8254C19.6758 16.0934 20.2692 15.5 21.0013 15.5V15.5C21.7333 15.5 22.3267 16.0934 22.3267 16.8254V18.7304C22.3267 19.4624 21.7333 20.0558 21.0013 20.0558V20.0558C20.2692 20.0558 19.6758 19.4624 19.6758 18.7304V16.8254Z" fill="white"/>
-                    <path d="M29.653 16.8254C29.653 16.0934 30.2464 15.5 30.9784 15.5V15.5C31.7104 15.5 32.3038 16.0934 32.3038 16.8254V18.7304C32.3038 19.4624 31.7104 20.0558 30.9784 20.0558V20.0558C30.2464 20.0558 29.653 19.4624 29.653 18.7304V16.8254Z" fill="white"/>
+                        <rect width="52" height="52" rx="26" fill="#1DA1F2"/>
+                        <path d="M19.5 17.7445H32.5C34.1569 17.7445 35.5 19.0877 35.5 20.7445V32.5004C35.4998 34.1571 34.1567 35.5004 32.5 35.5004H19.5C17.8433 35.5004 16.5002 34.1571 16.5 32.5004V20.7445C16.5 19.1394 17.7606 17.8287 19.3457 17.7484L19.5 17.7445Z" stroke="white" stroke-width="2"/>
+                        <line x1="15.7265" y1="22.864" x2="36.253" y2="22.864" stroke="white" stroke-width="2"/>
+                        <circle cx="21.0013" cy="26.7654" r="1.32541" fill="white"/>
+                        <circle cx="25.9898" cy="26.7654" r="1.32541" fill="white"/>
+                        <circle cx="30.9784" cy="26.7654" r="1.32541" fill="white"/>
+                        <circle cx="21.0013" cy="31.5621" r="1.32541" fill="white"/>
+                        <circle cx="25.9898" cy="31.5621" r="1.32541" fill="white"/>
+                        <circle cx="30.9784" cy="31.5621" r="1.32541" fill="white"/>
+                        <path d="M19.6758 16.8254C19.6758 16.0934 20.2692 15.5 21.0013 15.5V15.5C21.7333 15.5 22.3267 16.0934 22.3267 16.8254V18.7304C22.3267 19.4624 21.7333 20.0558 21.0013 20.0558V20.0558C20.2692 20.0558 19.6758 19.4624 19.6758 18.7304V16.8254Z" fill="white"/>
+                        <path d="M29.653 16.8254C29.653 16.0934 30.2464 15.5 30.9784 15.5V15.5C31.7104 15.5 32.3038 16.0934 32.3038 16.8254V18.7304C32.3038 19.4624 31.7104 20.0558 30.9784 20.0558V20.0558C30.2464 20.0558 29.653 19.4624 29.653 18.7304V16.8254Z" fill="white"/>
                     </svg>
                 </button>
                 <button
@@ -110,7 +115,7 @@
     inset: 0 0 auto 0;
     
     &__brand {
-        width: clamp(7.5rem, 5.73943661971831rem + 7.511737089201878vw, 12.5rem);
+        width: clamp(9rem, 6.887323943661972rem + 9.014084507042252vw, 15rem);
         height: auto;
     }
 
@@ -121,7 +126,7 @@
         padding: clamp(1rem, -0.7605633802816902rem + 7.511737089201878vw, 6rem);
         color: a.$clr-white;
         transform: translateX(100%);
-        transition: transform 500ms ease;
+        transition: transform 300ms ease;
         backdrop-filter: blur(20px);
 
         @include a.min(md) {

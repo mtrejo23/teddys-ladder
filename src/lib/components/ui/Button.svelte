@@ -5,9 +5,10 @@
         onclick?: () => void;
         class?: string;
         variant?: 'default' | 'play';
+        disabled?: boolean;
     }
 
-    let { href, text, onclick, class: className = '', variant = 'default' }: Props = $props();
+    let { href, text, onclick, class: className = '', variant = 'default', disabled = false }: Props = $props();
 </script>
 
 {#if href}
@@ -22,7 +23,7 @@
         {/if}
     </a>
 {:else}
-    <button class="button {className}" class:play={variant === 'play'} {onclick}>
+    <button class="button {className}" class:play={variant === 'play'} {onclick} {disabled}>
         {text}
         {#if variant === 'play'}
             <span class="play-icon">
@@ -53,6 +54,7 @@
     text-decoration: none;
     line-height: a.$lh-sm;
     border-radius: a.$br-100;
+    cursor: pointer;
     transition: background-color .3s ease, color .3s ease;
 
     &:hover {
@@ -73,6 +75,11 @@
             width: .75em;
             height: .75em;
         }
+    }
+
+    &:disabled {
+        opacity: .6;
+        cursor: not-allowed;
     }
 }
 </style>

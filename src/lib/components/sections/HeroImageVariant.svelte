@@ -4,14 +4,14 @@
     let {
         title,
         studentName,
-        scrollingText,
+        heroImage,
         image,
         variant = 'default'
     } = $props<{
         title: string;
         studentName: string;
-        scrollingText: string;
-        image: { url: string; alt: string };
+        heroImage: { asset: any; alt: string; width: number; height: number };
+        image: { asset: any; alt: string; width: number; height: number };
         variant?: 'default' | 'secondary';
     }>();
 </script>
@@ -19,8 +19,28 @@
 <section class="hero flex flex--items-end">
     <div class="hero__scrolling-text flex flex--justify-center">
         <div class="hero__scrolling-text__wrapper">
-            <p>{scrollingText}</p>
-            <p>{scrollingText}</p>
+            {#if image}
+                <div class="hero__bg-image">
+                    <Image
+                        image={image}
+                        sizes="100vw 50vw"
+                        breakpoints={[800, 1200, 1600]}
+                        priority={true}
+                        class="hero__bg-img"
+                    />
+                </div>
+            {/if}
+            {#if image}
+                <div class="hero__bg-image">
+                    <Image
+                        image={image}
+                        sizes="100vw 50vw"
+                        breakpoints={[800, 1200, 1600]}
+                        priority={true}
+                        class="hero__bg-img"
+                    />
+                </div>
+            {/if}
         </div>
         <div class="hero__scrolling-text__gradient">
         </div>
@@ -29,8 +49,8 @@
         <div class="grid md:grid--cols-12 gap-0_5">
             <div class="hero__avatar">
                 <Image
-                    image={image}
-                    alt={image.alt}
+                    image={heroImage}
+                    alt={heroImage.alt}
                     priority={true}
                     class="hero__image"
                 />
@@ -187,14 +207,13 @@
             }
         }
 
-        p {
-            font-family: a.$font-secondary;
-            font-size: a.$fs-xxl;
-            line-height: a.$lh-md;
-            color: a.$clr-light-grey;
-            transform: translateX(15%);
-            margin: 0;
+        .hero__bg-image {
             animation: scrollingText 20s linear infinite;
+
+            :global(img.hero__bg-img) {
+                height: auto;
+                object-fit: contain;
+            }
 
             @keyframes scrollingText {
                 from {

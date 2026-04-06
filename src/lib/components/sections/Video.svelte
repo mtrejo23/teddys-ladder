@@ -1,29 +1,88 @@
-<script>
-  import Button from "../ui/Button.svelte";
+<script lang="ts">
+    import Button from "../ui/Button.svelte";
+    import { onMount } from "svelte";
+    import { PortableText } from '@portabletext/svelte';
 
+    let {
+        title,
+        description,
+        vimeoUrl,
+        playVideoButton,
+        button,
+    } = $props<{
+        title: string;
+        description?: any[];
+        vimeoUrl?: string;
+        playVideoButton?: { buttonText: string };
+        button?: { buttonText: string; href: string };
+    }>();
+
+    let glightbox: { destroy: () => void } | undefined;
+    let videoEl: HTMLVideoElement | undefined = $state();
+
+    const videoSrc = "https://res.cloudinary.com/dvrjnbjx2/video/upload/v1773090540/teddys-ladder_ktdjp8.mp4";
+
+    onMount(() => {
+        import("glightbox").then(({ default: GLightbox }) => {
+            glightbox = GLightbox({
+                selector: ".js-video-lightbox",
+                touchNavigation: true,
+                loop: false,
+                autoplayVideos: true,
+            });
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && videoEl && !videoEl.src) {
+                    videoEl.src = videoSrc;
+                    videoEl.play();
+                    observer.unobserve(videoEl);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        if (videoEl) {
+            observer.observe(videoEl);
+        }
+
+        return () => {
+            glightbox?.destroy();
+            observer.disconnect();
+        };
+    });
 </script>
+
 <section class="video">
     <div class="container">
         <div class="video__wrapper flex flex--items-center flex--justify-center">
-            <video src="https://res.cloudinary.com/dvrjnbjx2/video/upload/v1773090540/teddys-ladder_ktdjp8.mp4" autoplay muted loop></video>
+            <video bind:this={videoEl} autoplay muted loop preload="none"></video>
             <div class="video__bg-overlay"></div>
             <div class="video__content text-align-center">
-                <h2>Can Your Child Do This?<br>Ours Can</h2>
-                <p>See our students read, write, and solve double-digit math through hands-on learning that prepares them for elementary school and beyond.</p>
+                <h2>{title}</h2>
+                {#if description}
+                    <div class="video__description">
+                        <PortableText value={description} />
+                    </div>
+                {/if}
                 <div class="button-wrapper flex gap-0_5 flex--justify-center">
 
-                    <Button
-                        href="/"
-                        text="Play Video"
-                        class="button--white"
-                        variant="play"
-                    />
+                    {#if vimeoUrl && playVideoButton}
+                        <Button
+                            href={vimeoUrl}
+                            text={playVideoButton.buttonText}
+                            class="button--white js-video-lightbox"
+                            variant="play"
+                        />
+                    {/if}
 
-                    <Button
-                        href="/"
-                        text="Watch More Videos"
-                        class="button--white"
-                    />
+                    {#if button}
+                        <Button
+                            href={button.href}
+                            text={button.buttonText}
+                            class="button--white"
+                        />
+                    {/if}
 
                 </div>
             </div>
@@ -39,7 +98,7 @@
     &__wrapper {
         position: relative;
         overflow: hidden;
-        border-radius: a.$br-4;
+        border-radius: a.$br-2;
         padding: a.$sp-cta-vertical a.$sp-cta-horizontal;
 
         @include a.min(lg) {

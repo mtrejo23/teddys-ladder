@@ -1,30 +1,41 @@
 <script lang="ts">
     import Button from '$lib/components/ui/Button.svelte';
+    import Image from '$lib/components/ui/Image.svelte';
+
+    import { PortableText } from '@portabletext/svelte';
     import { onMount, tick } from 'svelte';
     import { gsap } from 'gsap';
 
     let {
-        ctaTitle,
-        ctaDescription,
-        ctaButtonText,
-        ctaHref,
-        as: Element = 'section', headingElement = 'h2',
+        title,
+        description,
+        button,
+        image,
+        variant = 'default',
+        as: Element = 'section',
+        headingElement = 'h2',
         container = true,
-        ctaClass: className = '',
-        ctaButtonClass: ctaButtonClass = '',
-        ctaBgImage = ''
     } = $props<{
-        ctaTitle: string;
-        ctaDescription: string;
-        ctaButtonText: string;
-        ctaHref: string;
-        as?: string,
-        headingElement?: string,
-        container?: boolean,
-        ctaClass?: string,
-        ctaButtonClass?: string,
-        ctaBgImage?: string
+        title: string;
+        description?: any[];
+        button?: { buttonText: string; href: string };
+        image: { asset: any; alt: string; width: number; height: number };
+        variant?: string;
+        as?: string;
+        headingElement?: string;
+        container?: boolean;
     }>();
+
+    const buttonClassMap: Record<string, string> = {
+        'default': 'button--white',
+        'intro': '',
+        'teddys-ladder': 'button--white',
+        'teddys-ladder-flush-top': 'button--white',
+        'teddys-juniors': 'button--white button--white--hover-bg-primary',
+        'teddys-juniors-flush-top': 'button--white button--white--hover-bg-primary',
+    }
+
+    const buttonClass = $derived(buttonClassMap[variant] ?? '');
 
     let gradientEl = $state<HTMLElement | null>(null);
     let wrapperEl = $state<HTMLElement | null>(null);
@@ -65,29 +76,40 @@
 
 {#snippet content()}
     <div class="cta__wrapper" bind:this={wrapperEl}>
-        <div class="cta__bg-image">
-            <img src={ctaBgImage} alt="">
-        </div>
+        {#if image}
+            <div class="cta__bg-image">
+                <Image
+                    image={image}
+                    breakpoints={[400, 800, 1200]}
+                />
+            </div>
+        {/if}
         <div class="cta__bg-gradient" bind:this={gradientEl}></div>
         <div class="grid lg:grid--cols-10 gap-0_5">
             <div class="cta__content">
                 <div>
-                    <svelte:element this={headingElement} class="cta__title">{ctaTitle}</svelte:element>
-                    <p class="cta__description">{ctaDescription}</p>
+                    <svelte:element this={headingElement} class="cta__title">{title}</svelte:element>
+                    {#if description}
+                        <div class="cta__description">
+                            <PortableText value={description} />
+                        </div>
+                    {/if}
                 </div>
                 <div class="button-wrapper">
+
                     <Button
-                        href={ctaHref}
-                        text={ctaButtonText}
-                        class={ctaButtonClass}
+                        href={button.href}
+                        text={button.buttonText}
+                        class={buttonClass}
                     />
+                    
                 </div>
             </div>
         </div>
     </div>
 {/snippet}
 
-<svelte:element this={Element} class="cta {className}">
+<svelte:element this={Element} class="cta cta--{variant}">
     {#if container}
         <div class="container">
             {@render content()}
@@ -105,8 +127,8 @@
     &__wrapper {
         position: relative;
         padding: a.$sp-cta-top a.$sp-cta-horizontal a.$sp-cta-vertical;
-        background-color: a.$clr-pastel-secondary;
-        border-radius: a.$br-4;
+        background-color: a.$clr-primary;
+        border-radius: a.$br-2;
         overflow: hidden;
 
         @include a.min(md) {
@@ -127,7 +149,7 @@
             height: 100%;
         }
 
-        img {
+        :global(img) {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -140,20 +162,22 @@
         inset: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(0deg, #D6F4FF 50%, rgba(214, 244, 255, calc(var(--gradient-alpha, 0))) 100%);
+        background: linear-gradient(0deg, a.$clr-primary 50%, rgba(0, 33, 87, calc(var(--gradient-alpha, 0))) 100%);
 
         @include a.min(md) {
-            background: linear-gradient(90deg, #D6F4FF 50%, rgba(214, 244, 255, calc(var(--gradient-alpha, 0))) 100%);
+            background: linear-gradient(90deg, a.$clr-primary 50%, rgba(0, 33, 87, calc(var(--gradient-alpha, 0))) 100%);
         }
     }
 
     &__content {
         position: relative;
         grid-column: span 7;
+        color: a.$clr-white;
     }
 
     &__title {
         font-size: a.$fs-display;
+        color: a.$clr-white;
     }
 }
 </style>

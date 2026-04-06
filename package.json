@@ -23,8 +23,15 @@
 		"vite-plugin-devtools-json": "^1.0.0"
 	},
 	"dependencies": {
+		"@portabletext/svelte": "^3.0.1",
+		"@sanity/client": "^7.20.0",
+		"@sanity/image-url": "^2.0.3",
+		"@types/sanitize-html": "^2.16.1",
 		"embla-carousel-svelte": "^8.6.0",
+		"glightbox": "^3.3.1",
 		"gsap": "^3.14.2",
-		"modern-normalize": "^3.0.1"
+		"modern-normalize": "^3.0.1",
+		"sanitize-html": "^2.17.2",
+		"zod": "^4.3.6"
 	}
 }

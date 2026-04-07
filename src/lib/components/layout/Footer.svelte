@@ -13,7 +13,7 @@
                 <div class="footer__nav__column flex flex--column">
                     <a href="/about-teddys-ladder" class="footer__nav__link">About Teddy's Ladder</a>
                     <a href="/fun-and-celebrations" class="footer__nav__link">Fun & Celebrations</a>
-                    <a href="/calendar-and-newsletter" class="footer__nav__link">Calendar & Newsletter</a>
+                    <a href="/" class="footer__nav__link">Calendar & Newsletter</a>
                 </div>
                 <div class="footer__nav__column flex flex--column">
                     <a href="/testimonials" class="footer__nav__link">Testimonials</a>

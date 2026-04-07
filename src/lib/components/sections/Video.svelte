@@ -17,31 +17,38 @@
         button?: { buttonText: string; href: string };
     }>();
 
-    let glightbox: any;
-    let bgIframe: HTMLIFrameElement | undefined = $state();
+    let glightbox: { destroy: () => void } | undefined;
+    let videoEl: HTMLVideoElement | undefined = $state();
 
-    const vimeoId = "1172190789";
-    const vimeoBgSrc = `https://player.vimeo.com/video/${vimeoId}?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0`;
-
-    function resumeBgVideo() {
-        bgIframe?.contentWindow?.postMessage('{"method":"play"}', 'https://player.vimeo.com');
-    }
+    const videoSrc = "https://res.cloudinary.com/dpkokvd9k/video/upload/v1775578815/teddy_s_commercial_final_edit_rjwuuf.mp4";
 
     onMount(() => {
         import("glightbox").then(({ default: GLightbox }) => {
-            const options: Parameters<typeof GLightbox>[0] = {
+            glightbox = GLightbox({
                 selector: ".js-video-lightbox",
                 touchNavigation: true,
                 loop: false,
                 autoplayVideos: true,
-            };
-
-            glightbox = GLightbox(options);
-            glightbox.on("close", resumeBgVideo);
+            });
         });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && videoEl && !videoEl.src) {
+                    videoEl.src = videoSrc;
+                    videoEl.play();
+                    observer.unobserve(videoEl);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        if (videoEl) {
+            observer.observe(videoEl);
+        }
 
         return () => {
             glightbox?.destroy();
+            observer.disconnect();
         };
     });
 </script>
@@ -49,14 +56,7 @@
 <section class="video">
     <div class="container">
         <div class="video__wrapper flex flex--items-center flex--justify-center">
-            <iframe
-                bind:this={bgIframe}
-                src={vimeoBgSrc}
-                frameborder="0"
-                allow="autoplay; fullscreen"
-                title="Background video"
-                aria-hidden="true"
-            ></iframe>
+            <video bind:this={videoEl} autoplay muted loop preload="none"></video>
             <div class="video__bg-overlay"></div>
             <div class="video__content text-align-center">
                 <h2>{title}</h2>
@@ -93,8 +93,8 @@
 <style lang="scss">
 @use '$lib/styles/abstracts' as a;
 
-.video {
-
+.video{
+    
     &__wrapper {
         position: relative;
         overflow: hidden;
@@ -105,17 +105,12 @@
             aspect-ratio: 16/9;
         }
 
-        iframe {
+        video {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            inset: 0;
             width: 100%;
             height: 100%;
-            min-width: 177.78vh;
-            min-height: 100%;
-            border: none;
-            pointer-events: none;
+            object-fit: cover;
         }
     }
 

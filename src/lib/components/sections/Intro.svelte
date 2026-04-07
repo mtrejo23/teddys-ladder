@@ -6,18 +6,20 @@
         title,
         ages,
         description,
+        color,
         variant = 'default',
     } = $props<{
         title: string;
         ages?: string;
         description: any[];
+        color: string;
         variant?: string;
     }>();
 </script>
 
 <section class="intro-section">
     <div class="container">
-        <div class="intro-section__wrapper">
+        <div class="intro-section__wrapper intro-section__wrapper--{color}">
             <div class="grid lg:grid--cols-10 gap-0_5">
                 {#if variant === 'teddys-ladder'}
                     <Image src="/taaps-logo.png" width={147} height={147} alt="" class="intro-section__logo" />
@@ -41,10 +43,19 @@
     padding-top: 0;
 
     &__wrapper {
-        background-color: a.$clr-pastel-pink;
         padding: a.$sp-section a.$sp-cta-horizontal;
         border-radius: a.$br-2;
+
+        &--pastel-light-green { background-color: a.$clr-pastel-light-green; }
+        &--pastel-red-orange { background-color: a.$clr-pastel-red-orange; }
+        &--pastel-pink { background-color: a.$clr-pastel-pink; }
+        &--pastel-purple { background-color: a.$clr-pastel-purple; }
+        &--pastel-orange { background-color: a.$clr-pastel-orange; }
+        &--pastel-green { background-color: a.$clr-pastel-green; }
+        &--pastel-primary { background-color: a.$clr-pastel-primary; }
+        &--pastel-secondary { background-color: a.$clr-pastel-secondary; }
     }
+
     &__content {
         position: relative;
 
@@ -52,6 +63,7 @@
             grid-column: span 7;
         }
     }
+
     &__title {
         margin-bottom: 0;
     }

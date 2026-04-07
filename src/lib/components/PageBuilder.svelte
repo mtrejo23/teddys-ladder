@@ -29,7 +29,7 @@
     {:else if block._type === 'ctaBlock'}
         <Cta {...block} />
     {:else if block._type === 'introBlock'}
-        <Intro {...block} />
+        <Intro {...block} {color} />
     {:else if block._type === 'listBlock'}
         <List {...block} />
     {:else if block._type === 'highlightsBlock'}

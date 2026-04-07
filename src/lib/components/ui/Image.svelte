@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { urlFor, sanityUrl } from '$lib/sanity/image'
+    import { urlFor } from '$lib/sanity/image'
     import type { SanityImageSource } from '@sanity/image-url'
 
     interface Props {
@@ -35,14 +35,14 @@
     const srcset = $derived(() => {
         if (!isSanity || !image) return '';
         return breakpoints
-            .map(w => `${sanityUrl(urlFor(image).width(w).auto('format').url())} ${w}w`)
+            .map(w => `${urlFor(image).width(w).auto('format').url()} ${w}w`)
             .join(', ');
     });
 
     const imageUrl = $derived(() => {
         if (isSanity && image) {
             const maxWidth = Math.max(...breakpoints);
-            return sanityUrl(urlFor(image).width(maxWidth).auto('format').quality(quality).url());
+            return urlFor(image).width(maxWidth).auto('format').quality(quality).url();
         }
         return src ?? '';
     });

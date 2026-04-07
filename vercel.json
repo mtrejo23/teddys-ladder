@@ -1,8 +1,0 @@
-{
-    "rewrites": [
-        {
-            "source": "/sanity-assets/:path*",
-            "destination": "https://cdn.sanity.io/:path*"
-        }
-    ]
-}

@@ -51,7 +51,7 @@
                             ease: 'none',
                             scrollTrigger: {
                                 trigger: wrapperEl,
-                                start: 'top bottom',
+                                start: '60% bottom',
                                 end: 'bottom top',
                                 scrub: 1,
                             }

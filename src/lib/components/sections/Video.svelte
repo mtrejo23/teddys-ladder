@@ -17,38 +17,31 @@
         button?: { buttonText: string; href: string };
     }>();
 
-    let glightbox: { destroy: () => void } | undefined;
-    let videoEl: HTMLVideoElement | undefined = $state();
+    let glightbox: any;
+    let bgIframe: HTMLIFrameElement | undefined = $state();
 
-    const videoSrc = "https://res.cloudinary.com/dvrjnbjx2/video/upload/v1773090540/teddys-ladder_ktdjp8.mp4";
+    const vimeoId = "1172190789";
+    const vimeoBgSrc = `https://player.vimeo.com/video/${vimeoId}?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0`;
+
+    function resumeBgVideo() {
+        bgIframe?.contentWindow?.postMessage('{"method":"play"}', 'https://player.vimeo.com');
+    }
 
     onMount(() => {
         import("glightbox").then(({ default: GLightbox }) => {
-            glightbox = GLightbox({
+            const options: Parameters<typeof GLightbox>[0] = {
                 selector: ".js-video-lightbox",
                 touchNavigation: true,
                 loop: false,
                 autoplayVideos: true,
-            });
+            };
+
+            glightbox = GLightbox(options);
+            glightbox.on("close", resumeBgVideo);
         });
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && videoEl && !videoEl.src) {
-                    videoEl.src = videoSrc;
-                    videoEl.play();
-                    observer.unobserve(videoEl);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        if (videoEl) {
-            observer.observe(videoEl);
-        }
 
         return () => {
             glightbox?.destroy();
-            observer.disconnect();
         };
     });
 </script>
@@ -56,7 +49,14 @@
 <section class="video">
     <div class="container">
         <div class="video__wrapper flex flex--items-center flex--justify-center">
-            <video bind:this={videoEl} autoplay muted loop preload="none"></video>
+            <iframe
+                bind:this={bgIframe}
+                src={vimeoBgSrc}
+                frameborder="0"
+                allow="autoplay; fullscreen"
+                title="Background video"
+                aria-hidden="true"
+            ></iframe>
             <div class="video__bg-overlay"></div>
             <div class="video__content text-align-center">
                 <h2>{title}</h2>
@@ -93,8 +93,8 @@
 <style lang="scss">
 @use '$lib/styles/abstracts' as a;
 
-.video{
-    
+.video {
+
     &__wrapper {
         position: relative;
         overflow: hidden;
@@ -105,12 +105,17 @@
             aspect-ratio: 16/9;
         }
 
-        video {
+        iframe {
             position: absolute;
-            inset: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            min-width: 177.78vh;
+            min-height: 100%;
+            border: none;
+            pointer-events: none;
         }
     }
 

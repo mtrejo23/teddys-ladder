@@ -20,7 +20,7 @@
     <div class="container container--full">
         <div class="flex flex--items-center flex--justify-between">
             <a href="/" class="header__brand" title="Teddy's Ladder A Prep School for Elementary">
-                <img src="/teddys-ladder-logo.svg" alt="Teddy's Ladder A Prep School for Elementary">
+                <img width="240" height="77" src="/teddys-ladder-logo.svg" alt="Teddy's Ladder A Prep School for Elementary">
             </a>
             <div class="header__actions flex flex--items-center gap-0_5">
                 <nav id="primary-nav" class="header__nav flex flex--column flex--justify-end gap-3" class:open={isOpen}>

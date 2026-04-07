@@ -2,23 +2,23 @@
     <div class="container">
         <div class="grid grid--cols-2 lg:grid--cols-12 gap-0_5 row-gap-2">
             <div class="footer__brand">
-                <img src="/teddys-ladder-logo.svg" alt="">
+                <img width="200" height="77" src="/teddys-ladder-logo.svg" alt="">
             </div>
             <div class="footer__nav grid grid--cols-2 md:grid--cols-6 gap-0_5">
                 <div class="footer__nav__column flex flex--column">
                     <a href="/" class="footer__nav__link">Home</a>
-                    <a href="/" class="footer__nav__link">Programs</a>
-                    <a href="/" class="footer__nav__link">Campus</a>
+                    <a href="/programs" class="footer__nav__link">Programs</a>
+                    <a href="/campus" class="footer__nav__link">Campus</a>
                 </div>
                 <div class="footer__nav__column flex flex--column">
-                    <a href="/" class="footer__nav__link">About Us</a>
-                    <a href="/" class="footer__nav__link">Fun & Celebrations</a>
-                    <a href="/" class="footer__nav__link">Calendar & Newsletter</a>
+                    <a href="/about-teddys-ladder" class="footer__nav__link">About Teddy's Ladder</a>
+                    <a href="/fun-and-celebrations" class="footer__nav__link">Fun & Celebrations</a>
+                    <a href="/calendar-and-newsletter" class="footer__nav__link">Calendar & Newsletter</a>
                 </div>
                 <div class="footer__nav__column flex flex--column">
-                    <a href="/" class="footer__nav__link">Testimonials</a>
-                    <a href="/" class="footer__nav__link">Registration</a>
-                    <a href="/" class="footer__nav__link">Privacy Policy</a>
+                    <a href="/testimonials" class="footer__nav__link">Testimonials</a>
+                    <a href="/registration" class="footer__nav__link">Registration</a>
+                    <a href="/privacy-policy" class="footer__nav__link">Privacy Policy</a>
                 </div>
             </div>
         </div>

@@ -35,7 +35,13 @@
     const srcset = $derived(() => {
         if (!isSanity || !image) return '';
         return breakpoints
-            .map(w => `${urlFor(image).width(w).auto('format').url()} ${w}w`)
+            .map(w =>
+                `${urlFor(image)
+                    .width(w)
+                    .auto('format')
+                    .quality(quality)
+                    .url()} ${w}w`
+            )
             .join(', ');
     });
 

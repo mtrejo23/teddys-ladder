@@ -13,7 +13,7 @@
 </script>
 
 <SEO
-    title={data.page.title}
+    title="Welcome"
     metaDescription={data.page.metaDescription}
 />
 

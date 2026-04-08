@@ -20,7 +20,7 @@
     let glightbox: { destroy: () => void } | undefined;
     let videoEl: HTMLVideoElement | undefined = $state();
 
-    const videoSrc = "https://res.cloudinary.com/dpkokvd9k/video/upload/v1775578815/teddy_s_commercial_final_edit_rjwuuf.mp4";
+    const videoSrc = "https://res.cloudinary.com/dpkokvd9k/video/upload/q_auto:low,f_auto,w_960/v1775578815/teddy_s_commercial_final_edit_rjwuuf.mp4";
 
     onMount(() => {
         import("glightbox").then(({ default: GLightbox }) => {

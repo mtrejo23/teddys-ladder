@@ -11,7 +11,6 @@
 </script>
 
 <svelte:head>
-	<link rel="preload" href="/fonts/outfit-v15-latin-300.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 	<link rel="preload" href="/fonts/outfit-v15-latin-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 	<link rel="preload" href="/fonts/outfit-v15-latin-700.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 	<link rel="preload" href="/fonts/indie-flower-v24-latin-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />

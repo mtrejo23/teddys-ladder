@@ -17,6 +17,7 @@
     import Team from '$lib/components/sections/Team.svelte';
     import RichText from '$lib/components/sections/RichText.svelte';
     import ScheduleATour from '$lib/components/sections/ScheduleATour.svelte';
+    import PdfDownloads from '$lib/components/sections/PdfDownloads.svelte';
 
     let { page, color, form }: { page: any; color?: any; form?: any } = $props();
 </script>
@@ -48,6 +49,8 @@
         <ImageText {...block} />
     {:else if block._type === 'teamBlock'}
         <Team {...block} />
+    {:else if block._type === 'pdfDownloadsBlock'}
+        <PdfDownloads {...block} />
     {:else if block._type === 'richTextBlock'}
         <RichText {...block} />
     {:else if block._type === 'reference'}

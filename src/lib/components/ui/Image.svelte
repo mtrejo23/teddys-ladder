@@ -68,3 +68,12 @@
     decoding={priority ? 'sync' : 'async'}
     class={className}
 />
+
+<style lang="scss">
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+</style>

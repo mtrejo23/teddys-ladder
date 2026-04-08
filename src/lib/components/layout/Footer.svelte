@@ -1,10 +1,10 @@
 <footer class="footer">
     <div class="container">
-        <div class="grid grid--cols-2 lg:grid--cols-12 gap-0_5 row-gap-2">
+        <div class="grid grid--cols-2 lg:grid--cols-12 lg:gap-0_5 row-gap-2">
             <div class="footer__brand">
                 <img width="200" height="77" src="/teddys-ladder-logo.svg" alt="">
             </div>
-            <div class="footer__nav grid grid--cols-2 md:grid--cols-6 gap-0_5">
+            <div class="footer__nav grid md:grid--cols-6 lg:gap-0_5">
                 <div class="footer__nav__column flex flex--column">
                     <a href="/" class="footer__nav__link">Home</a>
                     <a href="/programs" class="footer__nav__link">Programs</a>
@@ -43,11 +43,16 @@
     padding-block: a.$sp-section;
 
     &__brand {
-        width: clamp(7.5rem, 5.73943661971831rem + 7.511737089201878vw, 12.5rem);
+        width: clamp(9rem, 6.887323943661972rem + 9.014084507042252vw, 15rem);
         height: auto;
 
         @include a.min(lg) {
             grid-column: span 2;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
         }
     }
     &__nav {

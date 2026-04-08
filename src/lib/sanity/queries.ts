@@ -156,6 +156,21 @@ const PAGE_BUILDER_FIELDS = `
                 fullBio
             }
         },
+        _type == "pdfDownloadsBlock" => {
+            title,
+            description,
+            columns,
+            items[] {
+                thumbnail {
+                    asset->,
+                    alt,
+                    "width": asset->metadata.dimensions.width,
+                    "height": asset->metadata.dimensions.height
+                },
+                itemDescription,
+                "file": file.asset->url
+            }
+        },
         _type == "richTextBlock" => {
             title,
             content

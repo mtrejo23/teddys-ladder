@@ -146,7 +146,7 @@
                                         <legend>Preferred Contact Method</legend>
                                         <label class="flex flex--items-center gap-0_5">
                                             <input type="radio" name="contact_method" value="email"
-                                                checked={values?.contact_method === 'email'} /> Email
+                                                checked={!values?.contact_method || values.contact_method === 'email'} /> Email
                                         </label>
                                         <label class="flex flex--items-center gap-0_5">
                                             <input type="radio" name="contact_method" value="phone"

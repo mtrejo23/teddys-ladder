@@ -31,6 +31,7 @@
 		"glightbox": "^3.3.1",
 		"gsap": "^3.14.2",
 		"modern-normalize": "^3.0.1",
+		"resend": "^6.10.0",
 		"sanitize-html": "^2.17.2",
 		"zod": "^4.3.6"
 	}

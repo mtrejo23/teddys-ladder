@@ -33,7 +33,7 @@ function isRateLimited(ip: string, email?: string): boolean {
 const isoDate = z
     .string()
     .trim()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, "Must be a valid date (YYYY-MM-DD)");
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Must be a valid date (MM-DD-YYYY)");
 
 // HTML forms always submit empty strings for unfilled fields, so we
 // transform "" -> undefined before applying optional validation.
@@ -44,9 +44,15 @@ const optionalDate = z
     .pipe(
         z
             .string()
-            .regex(/^\d{4}-\d{2}-\d{2}$/, "Must be a valid date (YYYY-MM-DD)")
+            .regex(/^\d{4}-\d{2}-\d{2}$/, "Must be a valid date (MM-DD-YYYY)")
             .optional(),
     );
+
+const formatDate = (date?: string): string => {
+    if (!date) return "";
+    const [year, month, day] = date.split("-");
+    return `${month}/${day}/${year}`;
+};
 
 const optionalShortStr = z
     .string()
@@ -116,7 +122,7 @@ function buildEmailHtml(clean: TourForm): string {
         .filter((c) => c.name)
         .map(
             (c, i) =>
-                `<p><strong>Child ${i + 1}:</strong> ${c.name} (DOB: ${c.dob})</p>`,
+                `<p><strong>Child ${i + 1}:</strong> ${c.name} (DOB: ${formatDate(c.dob)})</p>`,
         )
         .join("");
 
@@ -126,8 +132,8 @@ function buildEmailHtml(clean: TourForm): string {
         <p><strong>Email:</strong> ${clean.email}</p>
         <p><strong>Phone:</strong> ${clean.phone}</p>
         <p><strong>Contact preference:</strong> ${clean.contact_method}</p>
-        <p><strong>Tour date:</strong> ${clean.tour_date}</p>
-        <p><strong>Start date:</strong> ${clean.start_date}</p>
+        <p><strong>Tour date:</strong> ${formatDate(clean.tour_date)}</p>
+        <p><strong>Start date:</strong> ${formatDate(clean.start_date)}</p>
         <hr>
         ${children}
         ${clean.comments ? `<hr><p><strong>Comments:</strong><br>${clean.comments}</p>` : ""}

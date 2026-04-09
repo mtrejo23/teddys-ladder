@@ -10,6 +10,7 @@
         summary: string;
         slug: string;
         color?: string;
+        pageReference?: { slug: string };
     }
 
     type Image = {
@@ -56,7 +57,7 @@
                     programTitle={program.title}
                     programAges={program.ages}
                     programDescription={program.summary}
-                    programHref= "/programs/{program.slug}"
+                    programHref={program.pageReference?.slug ? `/${program.pageReference.slug}` : `/programs/${program.slug}`}
                     programButtonText="Learn More"
                     programColor={program.color}
                 />

@@ -237,7 +237,10 @@ const PAGE_BUILDER_FIELDS = `
                             color,
                             ages,
                             summary,
-                            "slug": slug.current
+                            "slug": slug.current,
+                            "pageReference": pageReference-> {
+                                "slug": slug.current
+                            }
                         },
                         ctaTitle,
                         button {
@@ -320,11 +323,13 @@ export const FUN_AND_CELEBRATIONS_QUERY = `*[_type == "funAndCelebrations" && sl
     }
 }`;
 
-export const PROGRAM_QUERY = `*[_type == "program" && slug.current == $slug][0] {
+export const PROGRAM_QUERY = `*[_type == "program" && (slugOverride.current == $slug || (!defined(slugOverride) && slug.current == $slug))][0] {
     title,
     metaDescription,
     color,
-    "slug": slug.current,
+    "pageReference": pageReference-> {
+        "slug": slug.current
+    },
     pageBuilder[] {
         ${PAGE_BUILDER_FIELDS}
     }
@@ -409,13 +414,17 @@ export const HOMEPAGE_QUERY = `*[_type == "page" && slug.current == "/"][0] {
                                 color,
                                 ages,
                                 summary,
-                                "slug": slug.current
+                                "slug": slug.current,
+                                "pageReference": pageReference-> {
+                                    "slug": slug.current
+                                }
                             },
                             ctaTitle,
                             button {
                                 buttonText,
+                                linkType,
                                 "href": select(
-                                    linkType == "internal" => internalLink->slug.current,
+                                    linkType == "internal" => "/" + internalLink->slug.current,
                                     linkType == "external" => externalLink
                                 )
                             },

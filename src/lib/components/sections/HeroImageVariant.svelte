@@ -175,7 +175,7 @@
     }
 
     &__student {
-        font-size: a.$fs-xs;
+        font-size: a.$fs-sm;
         line-height: a.$lh-sm;
 
         @include a.min(md) {

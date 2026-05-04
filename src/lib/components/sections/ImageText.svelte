@@ -18,11 +18,13 @@
 <section class="image-text">
     <div class="container">
         <div class="grid md:grid--cols-2 gap-section image-text--{imagePosition}">
-            <Image
-                image={image}
-                breakpoints={[400, 800, 1200]}
-                class="image-text__image"
-            />
+            <div class="image-text__image-wrapper">
+                <Image
+                    image={image}
+                    breakpoints={[400, 800, 1200]}
+                    class="image-text__image"
+                />
+            </div>
             <div class="image-text__content">
                 <h2>{title}</h2>
                 <PortableText value={description} />
@@ -49,14 +51,29 @@
     &__content {
         align-self: center;
     }
+
+    &__image-wrapper {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1/1;
+    border-radius: a.$br-2;
+
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: a.$br-2;
+            box-shadow: inset 0 0 2rem rgba(0, 0, 0, 0.1);
+            pointer-events: none;
+            z-index: 1;
+        }
+    }
 }
 
 :global(img.image-text__image) {
+    position: absolute;
     width: 100%;
     height: 100%;
-    aspect-ratio: 1/1;
-    overflow: hidden;
     object-fit: cover;
-    border-radius: a.$br-2;
 }
 </style>

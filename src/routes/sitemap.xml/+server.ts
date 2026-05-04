@@ -7,6 +7,11 @@ type SanityDoc = {
     lastmod: string;
 };
 
+const excludedPaths = [
+    "/programs/fun-and-celebrations",
+    "/programs/fun-learning-and-celebrations",
+];
+
 export const prerender = false;
 
 export const GET: RequestHandler = async () => {
@@ -58,7 +63,7 @@ export const GET: RequestHandler = async () => {
         ...otherPages,
         ...mappedPrograms,
         ...mappedEvents,
-    ];
+    ].filter((page) => !excludedPaths.includes(page.loc));
 
     const body = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

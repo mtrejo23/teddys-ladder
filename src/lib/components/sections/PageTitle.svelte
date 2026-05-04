@@ -22,7 +22,7 @@
 @use '$lib/styles/abstracts' as a;
 
 .page-title {
-    padding-top: 7rem;
+    padding-top: clamp(5rem, 4.295774647887324rem + 3.004694835680751vw, 7rem);
 
     &__wrapper {
         padding: a.$sp-section a.$sp-cta-horizontal;

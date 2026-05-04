@@ -8,16 +8,18 @@
         description,
         color,
         variant = 'default',
+        padding = 'default',
     } = $props<{
         title: string;
         ages?: string;
         description: any[];
         color: string;
         variant?: string;
+        padding?: string;
     }>();
 </script>
 
-<section class="intro-section">
+<section class="intro-section" class:intro-section--padding-top={padding === 'padding-top'}>
     <div class="container">
         <div class="intro-section__wrapper intro-section__wrapper--{color}">
             <div class="grid lg:grid--cols-10 gap-0_5">
@@ -41,6 +43,10 @@
 
 .intro-section {
     padding-top: 0;
+
+    &--padding-top {
+        padding-top: clamp(5rem, 3.591549295774648rem + 6.009389671361502vw, 9rem);
+    }
 
     &__wrapper {
         padding: a.$sp-section a.$sp-cta-horizontal;
@@ -71,10 +77,10 @@
 
 :global(img.intro-section__logo) {
     margin-bottom: a.$sp-1;
+    max-width: 9.1875rem;
 
     @include a.min(md) {
         position: absolute;
-        max-width: 9.1875rem;
         height: auto;
         margin-bottom: 0;
         top: a.$sp-section;

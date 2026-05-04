@@ -55,7 +55,8 @@ const PAGE_BUILDER_FIELDS = `
             ages,
             description,
             color,
-            variant
+            variant,
+            padding
         },
         _type == "listBlock" => {
             title,

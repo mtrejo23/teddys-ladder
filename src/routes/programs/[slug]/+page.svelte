@@ -10,5 +10,4 @@
     title={data.page.title}
     metaDescription={data.page.metaDescription}
 />
-
 <PageBuilder page={data.page} color={data.page.color} {form} />

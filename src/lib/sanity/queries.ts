@@ -31,6 +31,20 @@ const PAGE_BUILDER_FIELDS = `
             },
             variant
         },
+        _type == "heroAltBlock" => {
+            bgImage {
+                asset->,
+                alt,
+                "width": asset->metadata.dimensions.width,
+                "height": asset->metadata.dimensions.height
+            },
+            image {
+                asset->,
+                alt,
+                "width": asset->metadata.dimensions.width,
+                "height": asset->metadata.dimensions.height
+            }
+        },
         _type == "ctaBlock" => {
             title,
             description,
@@ -140,6 +154,19 @@ const PAGE_BUILDER_FIELDS = `
             },
             title,
             description
+        },
+        _type == "imagesBlock" => {
+            images[] {
+                asset->,
+                alt,
+                "width": asset->metadata.dimensions.width,
+                "height": asset->metadata.dimensions.height
+            }
+        },
+        _type == "videosBlock" => {
+            videos[] {
+                url
+            }
         },
         _type == "teamBlock" => {
             title,

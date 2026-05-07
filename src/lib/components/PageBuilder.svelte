@@ -18,6 +18,9 @@
     import RichText from '$lib/components/sections/RichText.svelte';
     import ScheduleATour from '$lib/components/sections/ScheduleATour.svelte';
     import PdfDownloads from '$lib/components/sections/PdfDownloads.svelte';
+    import Images from '$lib/components/sections/Images.svelte';
+    import Videos from '$lib/components/sections/Videos.svelte';
+    import HeroAlt from '$lib/components/sections/HeroAlt.svelte';
 
     let { page, color, form }: { page: any; color?: any; form?: any } = $props();
 </script>
@@ -53,6 +56,12 @@
         <PdfDownloads {...block} />
     {:else if block._type === 'richTextBlock'}
         <RichText {...block} />
+    {:else if block._type === 'imagesBlock'}
+        <Images {...block} />
+    {:else if block._type === 'videosBlock'}
+        <Videos {...block} />
+    {:else if block._type === 'heroAltBlock'}
+        <HeroAlt {...block} />
     {:else if block._type === 'reference'}
         {#each block.blocks as sharedBlock (sharedBlock._key)}
             {#if sharedBlock._type === 'ctaBlock'}

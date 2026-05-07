@@ -2,12 +2,17 @@
     import Button from '$lib/components/ui/Button.svelte';
     import { afterNavigate } from '$app/navigation';
     import { browser } from '$app/environment';
+    import { fade } from 'svelte/transition';
 
     let isOpen = $state(false);
     let scrollY = $state(0);
 
     function toggleMenu() {
         isOpen = !isOpen;
+    }
+
+    function closeMenu() {
+        isOpen = false;
     }
 
     afterNavigate(() => {
@@ -29,6 +34,14 @@
                 <img width="240" height="77" src="/teddys-ladder-logo.svg" alt="Teddy's Ladder A Prep School for Elementary" style="opacity: {logoOpacity};">
             </a>
             <div class="header__actions flex flex--items-center gap-0_5">
+                {#if isOpen}
+                    <div 
+                        class="header__nav-overlay" 
+                        onclick={closeMenu}
+                        aria-hidden="true"
+                        transition:fade={{ duration: 300 }}
+                    ></div>
+                {/if}
                 <nav id="primary-nav" class="header__nav flex flex--column flex--justify-end gap-3" class:open={isOpen}>
                     <ul>
                         <li class="text-align-right">
@@ -206,6 +219,14 @@
         a {
             color: inherit;
         }
+    }
+
+    &__nav-overlay {
+        position: fixed;
+        inset: 0;
+        background-color: rgba(255,255,255,0.1);
+        backdrop-filter: blur(10px);
+        z-index: -1;
     }
 
     &__schedule-tour-button {

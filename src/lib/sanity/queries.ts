@@ -203,6 +203,9 @@ const PAGE_BUILDER_FIELDS = `
             title,
             content
         },
+        _type == "pageTitleBlock" => {
+            title
+        },
         _type == "reference" => @-> {
             "title": title,
             "blocks": block[] {

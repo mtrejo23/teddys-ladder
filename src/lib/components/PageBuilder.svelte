@@ -21,6 +21,7 @@
     import Images from '$lib/components/sections/Images.svelte';
     import Videos from '$lib/components/sections/Videos.svelte';
     import HeroAlt from '$lib/components/sections/HeroAlt.svelte';
+    import PageTitle from '$lib/components/sections/PageTitle.svelte'
 
     let { page, color, form }: { page: any; color?: any; form?: any } = $props();
 </script>
@@ -62,6 +63,8 @@
         <Videos {...block} />
     {:else if block._type === 'heroAltBlock'}
         <HeroAlt {...block} />
+    {:else if block._type === 'pageTitleBlock'}
+        <PageTitle {...block} />
     {:else if block._type === 'reference'}
         {#each block.blocks as sharedBlock (sharedBlock._key)}
             {#if sharedBlock._type === 'ctaBlock'}

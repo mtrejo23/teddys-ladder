@@ -76,6 +76,7 @@
                         />
                     {/if}
 
+                    <!--
                     {#if button}
                         <Button
                             href={button.href}
@@ -83,6 +84,7 @@
                             class="button--white"
                         />
                     {/if}
+                    -->
 
                 </div>
             </div>

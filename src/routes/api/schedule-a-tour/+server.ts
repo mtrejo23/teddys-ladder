@@ -168,8 +168,8 @@ export const POST = async ({ request, getClientAddress }: RequestEvent) => {
     const clean = sanitizeForm(parsed.data);
 
     const { error } = await resend.emails.send({
-        from: "Teddy's Ladder <onboarding@resend.dev>",
-        to: "teddyladder@gmail.com",
+        from: "Teddy's Ladder <tour@teddysladder.com>",
+        to: "beth.lavine@gmail.com",
         subject: `New Tour Request - ${clean.first_name} ${clean.last_name}`,
         html: buildEmailHtml(clean),
     });
